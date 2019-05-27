@@ -1,0 +1,93 @@
+﻿<Window x:Class="HCI_Projekat2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCI_Projekat2"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1.61*"></ColumnDefinition>         
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" Grid.Column="0">
+            <TabItem Header="Events">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="7*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="0"></Rectangle>
+                    <DataGrid Name="TableEvent" Grid.Row="1" ItemsSource="{Binding Path=Events}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" PreviewMouseLeftButtonDown="TableEvent_PreviewMouseLeftButtonDown" MouseMove="TableEvent_MouseMove">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Icon">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Icon}" Height="50px" Width="50px"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Label" Binding="{Binding Label}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Type}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Alcohol" Binding="{Binding Alcohol}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Handicap" Binding="{Binding Handicap}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Smoking" Binding="{Binding Smoking}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Space" Binding="{Binding Space}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Audience" Binding="{Binding Audience}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tags" Binding="{Binding Tags}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Left" Margin="10px 0 0 0">Add</Button>
+                </Grid>                
+            </TabItem>
+            <TabItem Header="Types">
+
+            </TabItem>
+            <TabItem Header="Tags">
+
+            </TabItem>
+        </TabControl>
+        <TabControl Grid.Row="0" Grid.Column="1">
+            <TabItem Header="Map1">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Name="scrollViewer" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
+                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="3000" Height="2994" Name="Canvas1">
+                        <Canvas.Background>
+                            <ImageBrush ImageSource="map.png" Stretch="None" />
+                        </Canvas.Background>
+                    </Canvas>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Map2">
+                <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" >
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="map.png" Stretch="None" />
+                    </Canvas.Background>
+                </Canvas>
+            </TabItem>
+            <TabItem Header="Map3">
+                <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" >                    
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="map.png" Stretch="None" />
+                    </Canvas.Background>
+                </Canvas>
+            </TabItem>
+            <TabItem Header="Map4">
+                <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True">
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="map.png" Stretch="None" />
+                    </Canvas.Background>
+                </Canvas>
+            </TabItem>
+        </TabControl>       
+    </Grid>
+</Window>
