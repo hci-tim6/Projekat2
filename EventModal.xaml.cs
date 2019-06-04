@@ -45,6 +45,8 @@ namespace HCI_Projekat2
             }
         }
 
+        private string Backup_Icon;
+
         private ObservableCollection<Tag> Tags;
         private ObservableCollection<Tag> Backup_Tags;
 
@@ -220,6 +222,7 @@ namespace HCI_Projekat2
                 Backup_Tags = new ObservableCollection<Tag>(e.Tags);
             else
                 Backup_Tags = new ObservableCollection<Tag>();
+            Backup_Icon = e.Icon;
             ViewType = CollectionViewSource.GetDefaultView(types);
             ViewTag = CollectionViewSource.GetDefaultView(tags);
             Event = e;
@@ -240,6 +243,7 @@ namespace HCI_Projekat2
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Event.Tags = Backup_Tags;
+            Event.Icon = Backup_Icon;
             (Owner as MainWindow).View?.Refresh();
             Close();
         }

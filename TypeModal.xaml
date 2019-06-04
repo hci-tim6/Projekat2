@@ -22,15 +22,15 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="4" Grid.Column="0" Content="Image:" HorizontalAlignment="Right"></Label>
-        <Image Source="{Binding Type.Icon}" Grid.Row="4" Grid.Column="1"></Image>
+        <Image Source="{Binding Type.Icon, Mode=OneWay}" Grid.Row="4" Grid.Column="1"></Image>
         <Button Grid.Row="5" Grid.Column="1" Click="Button_Click_2"  Width="120">Choose file</Button>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Label:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding Type.Label}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding Type.Label, Mode=OneWay}"></TextBox>
         <Label Grid.Row="1" Grid.Column="0" Content="Name:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="1" Grid.Column="2" Name="TxtName" Text="{Binding Type.Name}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="2" Name="TxtName" Text="{Binding Type.Name, Mode=OneWay}"></TextBox>
         <Label Grid.Row="2" Grid.Column="0" Content="Description:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="2" Grid.Column="2" Name="TxtDescription" Text="{Binding Type.Description}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="2" Name="TxtDescription" Text="{Binding Type.Description, Mode=OneWay}"></TextBox>
 
         <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Width="60" Margin="15 0" Click="Button_Click_1">Submit</Button>

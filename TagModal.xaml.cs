@@ -27,11 +27,12 @@ namespace HCI_Projekat2
         public virtual void OnPropertyChanged(string v)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
-        }        
+        }       
 
-        private Models.Tag _tag;
+        private Tag _tag;
+        private Tag _backupTag;
 
-        public Models.Tag Tag
+        public Tag TagThis
         {
             get { return _tag; }
             set
@@ -39,7 +40,7 @@ namespace HCI_Projekat2
                 if (value != _tag)
                 {
                     _tag = value;
-                    OnPropertyChanged("Tag");
+                    OnPropertyChanged("TagThis");
                 }
             }
         }
@@ -47,12 +48,39 @@ namespace HCI_Projekat2
         {
             Owner = owner;
             DataContext = this;
-            Tag = t;
+            TagThis = t;
+            _backupTag = new Tag { Label = t.Label, Description = t.Description, Color = t.Color };
 
             if (t.Label == null || t.Label == "")
                 isAdd = true;
 
-            InitializeComponent();
+            InitializeComponent();        
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TagThis = _backupTag;
+            (Owner as MainWindow).ViewTag?.Refresh();
+            Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            TagThis.Label = TxtLabel.Text;
+            TagThis.Description = TxtDescription.Text;
+
+            if(ColorPicker.SelectedColor != null)
+            {
+                TagThis.Color = new SolidColorBrush((Color)ColorPicker.SelectedColor);
+            }            
+
+            if (isAdd)
+            {
+                (Owner as MainWindow).Tags.Add(TagThis);
+            }
+
+            (Owner as MainWindow).ViewTag?.Refresh();
+            Close();
         }
     }
 }
