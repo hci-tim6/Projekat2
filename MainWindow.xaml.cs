@@ -99,16 +99,16 @@ namespace HCI_Projekat2
 
             List<Models.Type> TypeList = new List<Models.Type>
             {
-                new Models.Type{Label = "TL1", Name = "TN1", Description = "TDESC1", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
-                new Models.Type{Label = "TL2", Name = "TN2", Description = "TDESC2", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
-                new Models.Type{Label = "TL3", Name = "TN3", Description = "TDESC3", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
-                new Models.Type{Label = "TL4", Name = "TN4", Description = "TDESC4", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
-                new Models.Type{Label = "TL5", Name = "TN5", Description = "TDESC5", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
-                new Models.Type{Label = "TL6", Name = "TN6", Description = "TDESC6", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
-                new Models.Type{Label = "TL7", Name = "TN7", Description = "TDESC7", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
-                new Models.Type{Label = "TL8", Name = "TN8", Description = "TDESC8", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
-                new Models.Type{Label = "TL9", Name = "TN9", Description = "TDESC9", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
-                new Models.Type{Label = "TL10", Name = "TN10", Description = "TDESC10", Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL1", Name = "TN1", Description = "TDESC1", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL2", Name = "TN2", Description = "TDESC2", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL3", Name = "TN3", Description = "TDESC3", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL4", Name = "TN4", Description = "TDESC4", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL5", Name = "TN5", Description = "TDESC5", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL6", Name = "TN6", Description = "TDESC6", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL7", Name = "TN7", Description = "TDESC7", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL8", Name = "TN8", Description = "TDESC8", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL9", Name = "TN9", Description = "TDESC9", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
+                new Models.Type{Label = "TL10", Name = "TN10", Description = "TDESC10", Icon="C:\\Users\\Milan\\Projekat2\\pin.png" },
             };
 
             List<Tag> TagList = new List<Tag>
@@ -124,44 +124,44 @@ namespace HCI_Projekat2
             Tags = new ObservableCollection<Tag>(TagList);
 
             List<Event> EventList = new List<Event> {
-                new Event{Label = "EA1", Name = "Djole Event", Description = "Descc", Type = Types[0], Alcohol = AlcoholStatus.Prohibited, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
+                new Event{Label = "EA1", Name = "Djole Event", Description = "Descc", Type = Types[0], Alcohol = AlcoholStatus.Prohibited, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
                 Smoking = SmokingStatus.Prohibited, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(), Date = new DateTime().AddDays(1)},
 
-                new Event{Label = "EE2", Name = "Djole Event 2", Description = "Descc", Type = Types[1], Alcohol = AlcoholStatus.Allowed, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
+                new Event{Label = "EE2", Name = "Djole Event 2", Description = "Descc", Type = Types[1], Alcohol = AlcoholStatus.Allowed, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
                 Smoking = SmokingStatus.Allowed, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.High, Tags = new ObservableCollection<Tag>()
                 {
                     Tags[2],
                     Tags[3],
                 }, Date = new DateTime().AddDays(2)} ,
 
-                new Event{Label = "EE3", Name = "Djole Event 3", Description = "Descc", Type = Types[2], Alcohol = AlcoholStatus.Sold, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
+                new Event{Label = "EE3", Name = "Djole Event 3", Description = "Descc", Type = Types[2], Alcohol = AlcoholStatus.Sold, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
                 Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Elderly, Price = Price.Low, Tags = new ObservableCollection<Tag>(), Date = new DateTime().AddDays(5)},
 
-                new Event{Label = "ED4", Name = "ED4 Event 4", Description = "Descc", Type = Types[3], Alcohol = AlcoholStatus.Sold, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
+                new Event{Label = "ED4", Name = "ED4 Event 4", Description = "Descc", Type = Types[3], Alcohol = AlcoholStatus.Sold, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
                 Smoking = SmokingStatus.Allowed, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Medium, Tags = new ObservableCollection<Tag>(), Date = new DateTime().AddDays(4)},
 
-                new Event{Label = "EC5", Name = "EC5 Event 5", Description = "Descc", Type = TypeList[4], Alcohol = AlcoholStatus.Prohibited, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
+                new Event{Label = "EC5", Name = "EC5 Event 5", Description = "Descc", Type = TypeList[4], Alcohol = AlcoholStatus.Prohibited, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
                 Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.High, Tags = new ObservableCollection<Tag>(){
                     Tags[0],
                     Tags[4],
                 }, Date = new DateTime().AddDays(3)},
 
-                new Event{Label = "EB6", Name = "Djole Event", Description = "Descc", Type = Types[5], Alcohol = AlcoholStatus.Allowed, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
+                new Event{Label = "EB6", Name = "Djole Event", Description = "Descc", Type = Types[5], Alcohol = AlcoholStatus.Allowed, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
                 Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Elderly, Price = Price.Low, Tags = new ObservableCollection<Tag>(){
                     Tags[2],
                     Tags[4],
                 }, Date = new DateTime().AddDays(5)},
 
-                new Event{Label = "EA7", Name = "Djole Event", Description = "Descc", Type = Types[6], Alcohol = AlcoholStatus.Allowed, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
+                new Event{Label = "EA7", Name = "Djole Event", Description = "Descc", Type = Types[6], Alcohol = AlcoholStatus.Allowed, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
                 Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Adults, Price = Price.Medium, Tags = new ObservableCollection<Tag>(){
                     Tags[0],
                     Tags[1],
                 }, Date = new DateTime().AddDays(7)},
 
-                new Event{Label = "EA8", Name = "Djole Event", Description = "Descc", Type = Types[7], Alcohol = AlcoholStatus.Prohibited, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
+                new Event{Label = "EA8", Name = "Djole Event", Description = "Descc", Type = Types[7], Alcohol = AlcoholStatus.Prohibited, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
                 Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Elderly, Price = Price.Free, Tags = new ObservableCollection<Tag>(), Date = new DateTime()},
 
-                new Event{Label = "EB9", Name = "Djole Event", Description = "Descc", Type = Types[8], Alcohol = AlcoholStatus.Sold, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
+                new Event{Label = "EB9", Name = "Djole Event", Description = "Descc", Type = Types[8], Alcohol = AlcoholStatus.Sold, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
                 Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Medium, Tags = new ObservableCollection<Tag>(){
                     Tags[0],
                     Tags[1],
@@ -170,38 +170,38 @@ namespace HCI_Projekat2
                     Tags[4],
                 }, Date = new DateTime()},
 
-                new Event{Label = "EC10", Name = "Djole Event", Description = "Descc", Type = Types[9], Alcohol = AlcoholStatus.Prohibited, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
+                new Event{Label = "EC10", Name = "Djole Event", Description = "Descc", Type = Types[9], Alcohol = AlcoholStatus.Prohibited, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
                 Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.High, Tags = new ObservableCollection<Tag>(){
                     Tags[1],
                     Tags[2],
                 }, Date = new DateTime()},
 
-                new Event{Label = "ED11", Name = "Djole Event", Description = "Descc", Type = Types[0], Alcohol = AlcoholStatus.Allowed, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
+                new Event{Label = "ED11", Name = "Djole Event", Description = "Descc", Type = Types[0], Alcohol = AlcoholStatus.Allowed, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
                 Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Low, Tags = new ObservableCollection<Tag>(){
                     Tags[0],
                     Tags[3],
                 }, Date = new DateTime()},
 
-                new Event{Label = "EE12", Name = "Djole Event", Description = "Descc", Type = Types[1], Alcohol = AlcoholStatus.Sold, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
+                new Event{Label = "EE12", Name = "Djole Event", Description = "Descc", Type = Types[1], Alcohol = AlcoholStatus.Sold, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
                 Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(){
                     Tags[0],
                     Tags[1],
                     Tags[2],
                 }, Date = new DateTime()},
 
-                new Event{Label = "EC13", Name = "Djole Event", Description = "Descc", Type = Types[2], Alcohol = AlcoholStatus.Prohibited, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
+                new Event{Label = "EC13", Name = "Djole Event", Description = "Descc", Type = Types[2], Alcohol = AlcoholStatus.Prohibited, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
                 Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.High, Tags = new ObservableCollection<Tag>(){
                     Tags[3],
                     Tags[4],
                 }, Date = new DateTime()},
 
-                new Event{Label = "ED14", Name = "Djole Event", Description = "Descc", Type = Types[3], Alcohol = AlcoholStatus.Allowed, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
+                new Event{Label = "ED14", Name = "Djole Event", Description = "Descc", Type = Types[3], Alcohol = AlcoholStatus.Allowed, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Accesible,
                 Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Low, Tags = new ObservableCollection<Tag>(){
                     Tags[2],
                     Tags[3],
                 }, Date = new DateTime()},
 
-                new Event{Label = "EE15", Name = "Djole Event", Description = "Descc", Type = Types[4], Alcohol = AlcoholStatus.Sold, Icon="D:\\Fakultet\\hci\\nase\\HCI projekat 2\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
+                new Event{Label = "EE15", Name = "Djole Event", Description = "Descc", Type = Types[4], Alcohol = AlcoholStatus.Sold, Icon="C:\\Users\\Milan\\Projekat2\\pin.png", Handicap = HandicapStatus.Inaccesible,
                 Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(){
                     Tags[0],
                     Tags[1],
@@ -717,6 +717,38 @@ namespace HCI_Projekat2
         {
             var row = GetParent<DataGridRow>((Button)sender);
             Events.Remove((Event)row.Item);
+        }
+
+        private void Type_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var row = GetParent<DataGridRow>((Button)sender);
+            var addDialog = new TypeModal(this, (Models.Type)row.Item);
+            addDialog.ShowDialog();
+        }
+
+        private void Type_PreviewMouseLeftButtonDownDelete(object sender, MouseButtonEventArgs e)
+        {
+            var row = GetParent<DataGridRow>((Button)sender);
+            Types.Remove((Models.Type)row.Item);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var addDialog = new TypeModal(this, new Models.Type());
+            addDialog.ShowDialog();
+        }
+
+        private void Tag_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var row = GetParent<DataGridRow>((Button)sender);
+            var addDialog = new TagModal(this, (Tag)row.Item);
+            addDialog.ShowDialog();
+        }
+
+        private void Tag_PreviewMouseLeftButtonDownDelete(object sender, MouseButtonEventArgs e)
+        {
+            var row = GetParent<DataGridRow>((Button)sender);
+            Tags.Remove((Tag)row.Item);
         }
     }
 }

@@ -194,10 +194,10 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Type_PreviewMouseLeftButtonDown">
                                                 <Image Width="30" Height="30" Source="edit.png"/>
                                             </Button>
-                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Type_PreviewMouseLeftButtonDownDelete">
                                                 <Image Width="30" Height="30" Source="delete.jpg"/>
                                             </Button>
                                         </StackPanel>
@@ -206,7 +206,7 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Right" VerticalAlignment="Center">New type</Button>
+                    <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click_2">New type</Button>
                 </Grid>                
             </TabItem>
             <TabItem Header="Tags" Width="200">
@@ -235,10 +235,10 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Tag_PreviewMouseLeftButtonDown">
                                                 <Image Width="30" Height="30" Source="edit.png"/>
                                             </Button>
-                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Tag_PreviewMouseLeftButtonDownDelete">
                                                 <Image Width="30" Height="30" Source="delete.jpg"/>
                                             </Button>
                                         </StackPanel>
