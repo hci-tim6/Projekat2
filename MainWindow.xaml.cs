@@ -771,5 +771,55 @@ namespace HCI_Projekat2
                 AllTabs.Visibility = Visibility.Hidden;
             }            
         }
+
+        static bool searchPredicate(Event e, string query)
+        {
+            bool retVal = false;
+            if (e.Label.ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            if (e.Name.ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            if (e.Description.ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            if (e.Type.Name.ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            if (e.Alcohol.ToString().ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            if (e.Handicap.ToString().ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            if (e.Smoking.ToString().ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            if (e.Space.ToString().ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            if (e.Price.ToString().ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            if (e.Audience.ToString().ToLower().Contains(query))
+            {
+                retVal = true;
+            }
+            return retVal;
+        }
+
+        private void SearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

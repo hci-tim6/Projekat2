@@ -57,6 +57,7 @@ namespace HCI_Projekat2.Models
             Icon = "";
             Type = null;
             Tags = new ObservableCollection<Tag>();
+            Date = DateTime.Today;
         }
 
         public virtual void OnPropertyChanged(string v)

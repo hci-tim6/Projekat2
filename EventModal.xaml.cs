@@ -33,6 +33,8 @@ namespace HCI_Projekat2
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
         }
 
+        private DateTime backupDateTime;
+
         private ICollectionView _View;
         public ICollectionView View
         {
@@ -227,6 +229,8 @@ namespace HCI_Projekat2
                 Backup_Tags = new ObservableCollection<Tag>(e.Tags);
             else
                 Backup_Tags = new ObservableCollection<Tag>();
+            backupDateTime = e.Date;
+
             Backup_Icon = e.Icon;
             ViewType = CollectionViewSource.GetDefaultView(types);
             ViewTag = CollectionViewSource.GetDefaultView(tags);
@@ -244,12 +248,12 @@ namespace HCI_Projekat2
 
             InitializeComponent();
             DateTime today = DateTime.Now;
-            TxtDatePicker.DisplayDateStart = today;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Event.Tags = Backup_Tags;
+            Event.Date = backupDateTime;
             Event.Icon = Backup_Icon;
             (Owner as MainWindow).View?.Refresh();
             Close();
@@ -267,7 +271,7 @@ namespace HCI_Projekat2
             Event.Space = (Space)TxtSpace.SelectedItem;
             Event.Price = (Price)TxtPrice.SelectedItem;
             Event.Type = (Models.Type)TxtType.SelectedItem;
-            Event.Date = (DateTime)TxtDatePicker.SelectedDate;
+            //Event.Date = (DateTime)TxtDatePicker.SelectedDate;
             Event.Tags = (ObservableCollection<Tag>)TxtTags.ItemsSource;
 
             Event.Icon = Event.Icon == null ? Event.Type.Icon : Event.Icon;
