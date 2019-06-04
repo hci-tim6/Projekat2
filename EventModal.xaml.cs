@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using System.Globalization;
+using System.Threading;
 
 namespace HCI_Projekat2
 {
@@ -215,6 +217,9 @@ namespace HCI_Projekat2
 
         public EventModal(Window owner, Event e, ObservableCollection<Tag> tags, ObservableCollection<Models.Type> types)
         {
+            CultureInfo ci = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
+            ci.DateTimeFormat.ShortDatePattern = "dd.MM.yyyy.";
+            Thread.CurrentThread.CurrentCulture = ci;
             Owner = owner;
             DataContext = this;
             Tags = tags;
@@ -238,6 +243,8 @@ namespace HCI_Projekat2
             SelectedPrice = e.Price;
 
             InitializeComponent();
+            DateTime today = DateTime.Now;
+            TxtDatePicker.DisplayDateStart = today;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -260,6 +267,7 @@ namespace HCI_Projekat2
             Event.Space = (Space)TxtSpace.SelectedItem;
             Event.Price = (Price)TxtPrice.SelectedItem;
             Event.Type = (Models.Type)TxtType.SelectedItem;
+            Event.Date = (DateTime)TxtDatePicker.SelectedDate;
             Event.Tags = (ObservableCollection<Tag>)TxtTags.ItemsSource;
 
             Event.Icon = Event.Icon == null ? Event.Type.Icon : Event.Icon;
@@ -315,5 +323,7 @@ namespace HCI_Projekat2
             }
             this.View?.Refresh();
         }
+
+
     }
 }
