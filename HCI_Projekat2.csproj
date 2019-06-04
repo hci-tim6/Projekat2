@@ -70,6 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\SearchPredicate.cs" />
     <Compile Include="TagList.xaml.cs">
       <DependentUpon>TagList.xaml</DependentUpon>
     </Compile>
