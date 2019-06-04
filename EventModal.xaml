@@ -1,0 +1,73 @@
+﻿<Window x:Class="HCI_Projekat2.EventModal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCI_Projekat2"
+        mc:Ignorable="d"
+        Title="Event" Height="500" Width="500" ResizeMode="NoResize">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1.2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="{Binding Event.Icon}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"></Image>
+        <Button Grid.Row="3" Grid.Column="0" Click="Button_Click_4">Choose file</Button>
+
+        <ListBox Grid.Row="5" Grid.Column="0" Grid.RowSpan="5" SelectionMode="Extended" Name="TxtTags" ItemsSource="{Binding Event.Tags}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#FF000000" HorizontalAlignment="Center" Background="{Binding Color}" BorderThickness="1.5" CornerRadius="6" Width="155">
+                        <Label HorizontalAlignment="Center" Content="{Binding Label}" Foreground="White" Margin="0, 3" Padding="2, 0"></Label>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="10" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="60" Margin="5 0" Click="Button_Click_3">Add tag</Button>
+            <Button Margin="5 0" Click="Button_Click_2">Remove tag</Button>
+        </StackPanel>      
+
+        <Label Grid.Row="0" Grid.Column="1" Content="Label:" HorizontalAlignment="Right"></Label>
+        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding Event.Label}"></TextBox>
+        <Label Grid.Row="1" Grid.Column="1" Content="Name:" HorizontalAlignment="Right"></Label>
+        <TextBox Grid.Row="1" Grid.Column="2" Name="TxtName" Text="{Binding Event.Name}"></TextBox>
+        <Label Grid.Row="2" Grid.Column="1" Content="Description:" HorizontalAlignment="Right"></Label>
+        <TextBox Grid.Row="2" Grid.Column="2" Name="TxtDescription" Text="{Binding Event.Description}"></TextBox>
+        <Label Grid.Row="3" Grid.Column="1" Content="Type:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="3" Grid.Column="2" SelectedItem="{Binding Event.Type}" Name="TxtType" ItemsSource="{Binding ViewType}"/>
+
+        <Label Grid.Row="5" Grid.Column="1" Content="Alcohol:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="5" Grid.Column="2" SelectedItem="{Binding SelectedAlcohol}" Name="TxtAlcohol" ItemsSource="{Binding CBListAlcohol}"/>
+        <Label Grid.Row="6" Grid.Column="1" Content="Handicap:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="6" Grid.Column="2" SelectedItem="{Binding SelectedHandicap}" Name="TxtHandicap" ItemsSource="{Binding CBListHandicap}"/>
+        <Label Grid.Row="7" Grid.Column="1" Content="Smoking:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="7" Grid.Column="2" SelectedItem="{Binding SelectedSmoking}" Name="TxtSmoking" ItemsSource="{Binding CBListSmoking}"/>
+        <Label Grid.Row="8" Grid.Column="1" Content="Space:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="8" Grid.Column="2" SelectedItem="{Binding SelectedSpace}" Name="TxtSpace" ItemsSource="{Binding CBListSpace}"/>
+        <Label Grid.Row="9" Grid.Column="1" Content="Target audience:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="9" Grid.Column="2" SelectedItem="{Binding SelectedTA}" Name="TxtAudience" ItemsSource="{Binding CBListTA}"/>
+        <Label Grid.Row="10" Grid.Column="1" Content="Price:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="10" Grid.Column="2"  SelectedItem="{Binding SelectedPrice}" Name="TxtPrice" ItemsSource="{Binding CBListPrice}"/>
+        <StackPanel Grid.Row="11" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Width="60" Margin="15 0" Click="Button_Click_1">Submit</Button>
+            <Button Width="60" Margin="0" Click="Button_Click">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>

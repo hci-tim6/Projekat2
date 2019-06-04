@@ -5,7 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_Projekat2"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized">
+        Title="MainWindow" WindowState="Maximized" Width="1920" Height="1080">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Padding" Value="2px"/>
+        </Style>
+        
+        <Style TargetType="DataGridCell">
+            <Style.Triggers>
+                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                    <Setter Property="Background" Value="#4169e1" />
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>        
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -15,51 +30,230 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <TabControl Grid.Row="0" Grid.Column="0">
-            <TabItem Header="Events">
-                <Grid>
+            <TabItem Header="Events" Width="200">
+                <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"></RowDefinition>
-                        <RowDefinition Height="7*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="20*"></RowDefinition>
+                        <RowDefinition Height="1.2*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Rectangle Grid.Row="0"></Rectangle>
-                    <DataGrid Name="TableEvent" Grid.Row="1" ItemsSource="{Binding Path=Events}" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" PreviewMouseLeftButtonDown="TableEvent_PreviewMouseLeftButtonDown" MouseMove="TableEvent_MouseMove">
+                    <Border Grid.Row="0" Background="#FFF0F0F0" Padding="5" Margin="0 0 0 5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="4.5*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBox Name="SearchLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"/>
+                            <Button Grid.Row="0" Grid.Column="10">Search</Button>
+                            <Button Grid.Row="2" Grid.Column="10" Click="Button_Click">Reset filter</Button>
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                                <Label>Alcohol:</Label>
+                                <CheckBox Name="Alchohol_Allowed" Checked="RefreshView" Unchecked="RefreshView">Allowed</CheckBox>
+                                <CheckBox Name="Alchohol_Prohibited" Unchecked="RefreshView" Checked="RefreshView">Prohibited</CheckBox>
+                                <CheckBox Name="Alchohol_Sold" Checked="RefreshView" Unchecked="RefreshView">Sold</CheckBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
+                                <Label>Handicap:</Label>
+                                <CheckBox Name="Handicap_Accessible" Unchecked="RefreshView" Checked="RefreshView">Accesible</CheckBox>
+                                <CheckBox Name="Handicap_Inaccesible" Checked="RefreshView" Unchecked="RefreshView">Inaccesible</CheckBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="4">
+                                <Label>Smoking:</Label>
+                                <CheckBox Name="Smoking_Allowed" Checked="RefreshView" Unchecked="RefreshView">Allowed</CheckBox>
+                                <CheckBox Name="Smoking_Prohibited" Unchecked="RefreshView" Checked="RefreshView">Prohibited</CheckBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="6">
+                                <Label>Space:</Label>
+                                <CheckBox Name="Space_Indoors" Checked="RefreshView" Unchecked="RefreshView">Indoors</CheckBox>
+                                <CheckBox Name="Space_Outdoors" Unchecked="RefreshView" Checked="RefreshView">Outdoors</CheckBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="8">
+                                <Label>Audience:</Label>
+                                <CheckBox Name="Audience_Children" Checked="RefreshView" Unchecked="RefreshView">Children</CheckBox>
+                                <CheckBox Name="Audience_Adults" Checked="RefreshView" Unchecked="RefreshView">Adults</CheckBox>
+                                <CheckBox Name="Audience_Elderly" Unchecked="RefreshView" Checked="RefreshView">Elderly</CheckBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="10">
+                                <Label>Price:</Label>
+                                <CheckBox Name="Price_Free" Checked="RefreshView" Unchecked="RefreshView">Free</CheckBox>
+                                <CheckBox Name="Price_Low" Unchecked="RefreshView" Checked="RefreshView">Low</CheckBox>
+                                <CheckBox Name="Price_Medium" Checked="RefreshView" Unchecked="RefreshView">Medium</CheckBox>
+                                <CheckBox Name="Price_High" Unchecked="RefreshView" Checked="RefreshView">High</CheckBox>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <DataGrid Name="TableEvent" Grid.Row="1" ItemsSource="{Binding Path=Events}" IsReadOnly="True" RowHeaderWidth="0"
+                              AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" HorizontalScrollBarVisibility="Disabled"
+                              MouseLeftButtonDown="TableEvent_PreviewMouseLeftButtonDown" MouseMove="TableEvent_MouseMove">
+                        
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Icon">
+                            <DataGridTemplateColumn Width="75" Header="Label" IsReadOnly="True" SortMemberPath="Label">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding Icon}" Height="50px" Width="50px"/>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                                            <TextBlock Name="lbl" TextWrapping="Wrap" Text="{Binding Label}"></TextBlock>
+                                            <Image Grid.Row="0" Grid.Column="0" DockPanel.Dock="Left" Height="50px" Width="75px" Source="{Binding Icon}"></Image>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Label" Binding="{Binding Label}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Type" Binding="{Binding Type}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Alcohol" Binding="{Binding Alcohol}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Handicap" Binding="{Binding Handicap}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Smoking" Binding="{Binding Smoking}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Space" Binding="{Binding Space}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Audience" Binding="{Binding Audience}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Price}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Tags" Binding="{Binding Tags}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Date" Binding="{Binding FormattedDate}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Type.Label}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Alcohol" Binding="{Binding Alcohol}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Handicap" Binding="{Binding Handicap}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Smoking" Binding="{Binding Smoking}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Space" Binding="{Binding Space}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Audience" Binding="{Binding Audience}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Tags" Width="*" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ItemsControl ItemsSource="{Binding Tags}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border BorderBrush="#FF000000" Background="{Binding Color}" BorderThickness="1.5" CornerRadius="6">
+                                                        <Label Content="{Binding Label}" Foreground="White" Margin="0, 0, 3, 3" Padding="2, 0"></Label>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="50" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDown">
+                                                <Image Width="30" Height="30" Source="edit.png"/>
+                                            </Button>
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDownDelete">
+                                                <Image Width="30" Height="30" Source="delete.jpg"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Left" Margin="10px 0 0 0">Add</Button>
+                    <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click_1">New event</Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Types" Width="200">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="20*"></RowDefinition>
+                        <RowDefinition Height="1.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid Name="TableType" Grid.Row="1" ItemsSource="{Binding Path=Types}" IsReadOnly="True" RowHeaderWidth="0"
+                              AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" HorizontalScrollBarVisibility="Disabled">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="75" Header="Icon" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Grid.Row="0" Grid.Column="0" DockPanel.Dock="Left" Height="50px" Width="75px" Source="{Binding Icon}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Width="75" Header="Label" Binding="{Binding Label}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="75" Header="Name" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTemplateColumn Width="50" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                                <Image Width="30" Height="30" Source="edit.png"/>
+                                            </Button>
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                                <Image Width="30" Height="30" Source="delete.jpg"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Right" VerticalAlignment="Center">New type</Button>
                 </Grid>                
             </TabItem>
-            <TabItem Header="Types">
-
-            </TabItem>
-            <TabItem Header="Tags">
-
+            <TabItem Header="Tags" Width="200">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="20*"></RowDefinition>
+                        <RowDefinition Height="1.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid Name="TableTag" Grid.Row="1" ItemsSource="{Binding Path=Tags}" IsReadOnly="True" RowHeaderWidth="0"
+                              AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" HorizontalScrollBarVisibility="Disabled">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="75" Header="Label" Binding="{Binding Label}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTemplateColumn Width="75" Header="Color" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Rectangle Fill="{Binding Color}" Width="50px" Height="50px"></Rectangle>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                            <DataGridTemplateColumn Width="50" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                                <Image Width="30" Height="30" Source="edit.png"/>
+                                            </Button>
+                                            <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                                                <Image Width="30" Height="30" Source="delete.jpg"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Right" VerticalAlignment="Center">New tag</Button>
+                </Grid>
             </TabItem>
         </TabControl>
         <TabControl Grid.Row="0" Grid.Column="1">
             <TabItem Header="Map1">
-                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Name="scrollViewer" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
                     <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="3000" Height="2994" Name="Canvas1">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />

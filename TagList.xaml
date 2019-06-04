@@ -1,0 +1,28 @@
+﻿<Window x:Class="HCI_Projekat2.TagList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCI_Projekat2"
+        mc:Ignorable="d"
+        Title="TagList" Height="400" Width="300" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Row="0" Grid.Column="0" SelectionMode="Extended" Name="TxtTags" ItemsSource="{Binding ViewTag}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#FF000000" HorizontalAlignment="Center" Background="{Binding Color}" BorderThickness="1.5" CornerRadius="6" Width="270">
+                        <Label HorizontalAlignment="Center" Content="{Binding Label}" Foreground="White" Margin="0, 3" Padding="2, 0"></Label>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Row="1" Grid.Column="0" Content="Add" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" Height="30" Width="200" Click="Button_Click_1"></Button>
+    </Grid>
+</Window>
