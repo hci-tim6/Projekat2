@@ -29,21 +29,8 @@ namespace HCI_Projekat2
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
         }
 
-        private ICollectionView _View;
-        public ICollectionView View
-        {
-            get
-            {
-                return _View;
-            }
-            set
-            {
-                _View = value;
-                OnPropertyChanged("View");
-            }
-        }
-
         private Models.Type _type;
+        private Models.Type _backupType;
 
         public Models.Type Type
         {
@@ -62,7 +49,7 @@ namespace HCI_Projekat2
             Owner = owner;
             DataContext = this;
             Type = t;
-
+            _backupType = new Models.Type { Description = t.Description, Icon = t.Icon, Label = t.Label, Name = t.Name };
             if (t.Label == null || t.Label == "")
                 isAdd = true;            
 
@@ -71,7 +58,10 @@ namespace HCI_Projekat2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            (Owner as MainWindow).View?.Refresh();
+            Type.Name = _backupType.Name;
+            Type.Label = _backupType.Label;
+            Type.Icon = _backupType.Icon;
+            Type.Description = _backupType.Description;
             Close();
         }
 
@@ -86,7 +76,7 @@ namespace HCI_Projekat2
                 (Owner as MainWindow).Types.Add(Type);
             }
 
-            (Owner as MainWindow).View?.Refresh();
+            (Owner as MainWindow).ViewType?.Refresh();
             Close();
         }
 
@@ -101,7 +91,6 @@ namespace HCI_Projekat2
             {
                 Type.Icon = new BitmapImage(new Uri(op.FileName)).ToString();
             }
-            this.View?.Refresh();
         }
     }
 }

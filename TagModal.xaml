@@ -22,17 +22,17 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="4" Grid.Column="0" Content="Color:" HorizontalAlignment="Right"></Label>
-        <xctk:ColorPicker Name="ColorPicker" Grid.Row ="4" Grid.Column="1" SelectedColor="{Binding Tag.Color}"  Margin="86,144,31,0" Height="26" VerticalAlignment="Top" DisplayColorAndName="True"/>
+        <xctk:ColorPicker Name="ColorPicker" Grid.Row ="4" Grid.Column="1" SelectedColor="{Binding TagThis.Color.Color, Mode=OneWay}" Height="26" VerticalAlignment="Top" DisplayColorAndName="True"/>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Label:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding Tag.Label}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding TagThis.Label, Mode=OneWay}"></TextBox>
         
         <Label Grid.Row="2" Grid.Column="0" Content="Description:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="2" Grid.Column="2" Name="TxtDescription" Text="{Binding Tag.Description}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="2" Name="TxtDescription" Text="{Binding TagThis.Description, Mode=OneWay}"></TextBox>
 
         <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Width="60" Margin="15 0">Submit</Button>
-            <Button Width="60" Margin="0" >Cancel</Button>
+            <Button Width="60" Margin="15 0" Click="Button_Click_1">Submit</Button>
+            <Button Width="60" Margin="0" Click="Button_Click">Cancel</Button>
         </StackPanel>
     </Grid>
 </Window>

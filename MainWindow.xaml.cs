@@ -742,14 +742,34 @@ namespace HCI_Projekat2
         private void Tag_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var row = GetParent<DataGridRow>((Button)sender);
-            var addDialog = new TagModal(this, (Tag)row.Item);
+            var addDialog = new TagModal(this, (Models.Tag)row.Item);
             addDialog.ShowDialog();
         }
 
         private void Tag_PreviewMouseLeftButtonDownDelete(object sender, MouseButtonEventArgs e)
         {
             var row = GetParent<DataGridRow>((Button)sender);
-            Tags.Remove((Tag)row.Item);
+            Tags.Remove((Models.Tag)row.Item);
+        }
+
+        private void Button_PreviewMouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            var addDialog = new TagModal(this, new Models.Tag());
+            addDialog.ShowDialog();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if(AllTabs.Visibility == Visibility.Hidden)
+            {
+                LeftCol.Width = new GridLength(800.0);
+                AllTabs.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LeftCol.Width = new GridLength(50.0);
+                AllTabs.Visibility = Visibility.Hidden;
+            }            
         }
 
         

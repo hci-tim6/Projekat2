@@ -29,7 +29,7 @@ namespace HCI_Projekat2.Models
             }
         }
 
-        private void OnPropertyChanged(string v)
+        public virtual void OnPropertyChanged(string v)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
         }
