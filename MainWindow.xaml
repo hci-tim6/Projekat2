@@ -67,7 +67,7 @@
                                     <RowDefinition Height="1*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <TextBox Name="SearchLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"/>
-                                <Button Grid.Row="0" Grid.Column="10">Search</Button>
+                                <Button Grid.Row="0" Grid.Column="10" Click="SearchBtn_Click">Search</Button>
                                 <Button Grid.Row="2" Grid.Column="10" Click="Button_Click">Reset filter</Button>
                                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
                                     <Label>Alcohol:</Label>

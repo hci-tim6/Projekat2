@@ -17,49 +17,64 @@ namespace HCI_Projekat2.Models
         {
             get { return IsMatch; }
         }
-        private bool IsMatch(Object obj)
+        public bool IsMatch(Object obj)
         {
             Event e = (Event) obj;
-            bool retVal = false;
+            Query = Query.ToLower();
             if (e.Label.ToLower().Contains(Query))
             {
-                retVal = true;
+                return true;
             }
             if (e.Name.ToLower().Contains(Query))
             {
-                retVal = true;
+                return true;
             }
             if (e.Description.ToLower().Contains(Query))
             {
-                retVal = true;
+                return true;
             }
             if (e.Type.Name.ToLower().Contains(Query))
             {
-                retVal = true;
+                return true;
             }
-            if (e.Alcohol.ToString().ToLower().Contains(Query))
+            return false;
+        }
+        public int compareEvents(Event e1, Event e2)
+        {
+            int retVal = 0;
+            int e1Val = eventEval(e1);
+            int e2Val = eventEval(e2);
+            if (e1Val < e2Val)
             {
-                retVal = true;
+                retVal = 1;
+            } else if (e1Val == e2Val)
+            {
+                retVal = 0;
             }
-            if (e.Handicap.ToString().ToLower().Contains(Query))
+            else
             {
-                retVal = true;
+                retVal = -1;
             }
-            if (e.Smoking.ToString().ToLower().Contains(Query))
+            return retVal;
+        }
+        private int eventEval(Event e1)
+        {
+            int retVal = 0;
+            if (e1.Label.ToLower().Contains(Query))
             {
-                retVal = true;
+                retVal += 25; 
             }
-            if (e.Space.ToString().ToLower().Contains(Query))
+            if (e1.Name.ToLower().Contains(Query))
             {
-                retVal = true;
+                retVal += 15;
             }
-            if (e.Price.ToString().ToLower().Contains(Query))
+            if (e1.Description.ToLower().Contains(Query))
             {
-                retVal = true;
+                retVal += 4;
             }
-            if (e.Audience.ToString().ToLower().Contains(Query))
+            if (e1.Type.Name.ToLower().Contains(Query))
             {
-                retVal = true;
+                retVal += 3;
             }
             return retVal;
         }

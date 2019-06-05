@@ -32,11 +32,11 @@
         <Image Source="{Binding Event.Icon}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"></Image>
         <Button Grid.Row="4" Grid.Column="0" Click="Button_Click_4">Choose file</Button>
 
-        <ListBox Grid.Row="6" Grid.Column="0" Grid.RowSpan="5" SelectionMode="Extended" Name="TxtTags" ItemsSource="{Binding Event.Tags}">
+        <ListBox Grid.Row="6" Grid.Column="0" Grid.RowSpan="5" SelectionMode="Extended" Name="TxtTags" ItemsSource="{Binding Event.Tags, Mode=OneWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="#FF000000" HorizontalAlignment="Center" Background="{Binding Color}" BorderThickness="1.5" CornerRadius="6" Width="155">
-                        <Label HorizontalAlignment="Center" Content="{Binding Label}" Foreground="White" Margin="0, 3" Padding="2, 0"></Label>
+                    <Border BorderBrush="#FF000000" HorizontalAlignment="Center" Background="{Binding Color, Mode=OneWay}" BorderThickness="1.5" CornerRadius="6" Width="155">
+                        <Label HorizontalAlignment="Center" Content="{Binding Label, Mode=OneWay}" Foreground="White" Margin="0, 3" Padding="2, 0"></Label>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -47,31 +47,31 @@
         </StackPanel>      
 
         <Label Grid.Row="0" Grid.Column="1" Content="Label:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding Event.Label}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding Event.Label, Mode=OneWay}"></TextBox>
         <Label Grid.Row="1" Grid.Column="1" Content="Name:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="1" Grid.Column="2" Name="TxtName" Text="{Binding Event.Name}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="2" Name="TxtName" Text="{Binding Event.Name, Mode=OneWay}"></TextBox>
         <Label Grid.Row="2" Grid.Column="1" Content="Date:" HorizontalAlignment="Right" ></Label>
         <xctk:DateTimePicker
             Name="TxtDatePicker"
-            Grid.Row="2" Grid.Column="2" Format="Custom" FormatString="dd.MM.yyyy." TimePickerVisibility="Hidden" Value ="{Binding Event.Date}">
+            Grid.Row="2" Grid.Column="2" Format="Custom" FormatString="dd.MM.yyyy." TimePickerVisibility="Hidden" Value ="{Binding Event.Date, Mode=OneWay}">
 
         </xctk:DateTimePicker>
         <Label Grid.Row="3" Grid.Column="1" Content="Description:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="3" Grid.Column="2" Name="TxtDescription" Text="{Binding Event.Description}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="2" Name="TxtDescription" Text="{Binding Event.Description, Mode=OneWay}"></TextBox>
         <Label Grid.Row="4" Grid.Column="1" Content="Type:" HorizontalAlignment="Right"></Label>
-        <ComboBox Grid.Row="4" Grid.Column="2" SelectedItem="{Binding Event.Type}" Name="TxtType" ItemsSource="{Binding ViewType}"/>
+        <ComboBox Grid.Row="4" Grid.Column="2" SelectedItem="{Binding Event.Type, Mode=OneWay}" Name="TxtType" ItemsSource="{Binding ViewType}"/>
         <Label Grid.Row="6" Grid.Column="1" Content="Alcohol:" HorizontalAlignment="Right"></Label>
-        <ComboBox Grid.Row="6" Grid.Column="2" SelectedItem="{Binding SelectedAlcohol}" Name="TxtAlcohol" ItemsSource="{Binding CBListAlcohol}"/>
+        <ComboBox Grid.Row="6" Grid.Column="2" SelectedItem="{Binding SelectedAlcohol, Mode=OneWay}" Name="TxtAlcohol" ItemsSource="{Binding CBListAlcohol}"/>
         <Label Grid.Row="7" Grid.Column="1" Content="Handicap:" HorizontalAlignment="Right"></Label>
-        <ComboBox Grid.Row="7" Grid.Column="2" SelectedItem="{Binding SelectedHandicap}" Name="TxtHandicap" ItemsSource="{Binding CBListHandicap}"/>
+        <ComboBox Grid.Row="7" Grid.Column="2" SelectedItem="{Binding SelectedHandicap, Mode=OneWay}" Name="TxtHandicap" ItemsSource="{Binding CBListHandicap}"/>
         <Label Grid.Row="8" Grid.Column="1" Content="Smoking:" HorizontalAlignment="Right"></Label>
-        <ComboBox Grid.Row="8" Grid.Column="2" SelectedItem="{Binding SelectedSmoking}" Name="TxtSmoking" ItemsSource="{Binding CBListSmoking}"/>
+        <ComboBox Grid.Row="8" Grid.Column="2" SelectedItem="{Binding SelectedSmoking, Mode=OneWay}" Name="TxtSmoking" ItemsSource="{Binding CBListSmoking}"/>
         <Label Grid.Row="9" Grid.Column="1" Content="Space:" HorizontalAlignment="Right"></Label>
-        <ComboBox Grid.Row="9" Grid.Column="2" SelectedItem="{Binding SelectedSpace}" Name="TxtSpace" ItemsSource="{Binding CBListSpace}"/>
+        <ComboBox Grid.Row="9" Grid.Column="2" SelectedItem="{Binding SelectedSpace, Mode=OneWay}" Name="TxtSpace" ItemsSource="{Binding CBListSpace}"/>
         <Label Grid.Row="10" Grid.Column="1" Content="Target audience:" HorizontalAlignment="Right"></Label>
-        <ComboBox Grid.Row="10" Grid.Column="2" SelectedItem="{Binding SelectedTA}" Name="TxtAudience" ItemsSource="{Binding CBListTA}"/>
+        <ComboBox Grid.Row="10" Grid.Column="2" SelectedItem="{Binding SelectedTA, Mode=OneWay}" Name="TxtAudience" ItemsSource="{Binding CBListTA}"/>
         <Label Grid.Row="11" Grid.Column="1" Content="Price:" HorizontalAlignment="Right"></Label>
-        <ComboBox Grid.Row="11" Grid.Column="2"  SelectedItem="{Binding SelectedPrice}" Name="TxtPrice" ItemsSource="{Binding CBListPrice}"/>
+        <ComboBox Grid.Row="11" Grid.Column="2"  SelectedItem="{Binding SelectedPrice, Mode=OneWay}" Name="TxtPrice" ItemsSource="{Binding CBListPrice}"/>
         <StackPanel Grid.Row="12" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Width="60" Margin="15 0" Click="Button_Click_1">Submit</Button>
             <Button Width="60" Margin="0" Click="Button_Click">Cancel</Button>
