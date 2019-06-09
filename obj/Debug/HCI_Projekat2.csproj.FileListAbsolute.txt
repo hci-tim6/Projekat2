@@ -52,3 +52,10 @@ C:\Users\Milan\Projekat2\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Milan\Projekat2\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Milan\Projekat2\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Milan\Projekat2\obj\Debug\HCI_Projekat2.csproj.CopyComplete
+C:\Users\Milan\Projekat2\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Milan\Projekat2\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Milan\Projekat2\obj\Debug\HCI_Projekat2_Content.g.cs
+C:\Users\Milan\Projekat2\bin\Debug\desno.png
+C:\Users\Milan\Projekat2\bin\Debug\levo.png
+C:\Users\Milan\Projekat2\obj\Debug\DragTutorial.g.cs
+C:\Users\Milan\Projekat2\obj\Debug\DragTutorial.baml

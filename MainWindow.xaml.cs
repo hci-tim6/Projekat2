@@ -29,9 +29,6 @@ namespace HCI_Projekat2
     public partial class MainWindow : Window
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private double backupX;
-        private double backupY;
-
         public Helper.EventHelper eventHelper = new Helper.EventHelper();
         public Helper.TagHelper tagHelper = new Helper.TagHelper();
         public Helper.TypeHelper typeHelper = new Helper.TypeHelper();
@@ -97,6 +94,23 @@ namespace HCI_Projekat2
             }
         }
 
+        private bool _isCheckedState;
+        public bool IsCheckedState
+        {
+            get
+            {
+                return _isCheckedState;
+            }
+            set
+            {
+                if (value != _isCheckedState)
+                {
+                    _isCheckedState = value;
+                    OnPropertyChanged("IsCheckedState");
+                }
+            }
+        }
+
         public ObservableCollection<Event> Events { get; set; }
         public ObservableCollection<Models.Type> Types { get; set; }
         public ObservableCollection<Tag> Tags { get; set; }
@@ -113,131 +127,142 @@ namespace HCI_Projekat2
         {
             InitializeComponent();
             DataContext = this;
+            IsCheckedState = false;
             activeCanvas = Canvas1;
             scrollViewer = scrollViewer1;
 
-            //List<Models.Type> TypeList = new List<Models.Type>
-            //{
-            //    new Models.Type{Label = "TL1", Name = "TN1", Description = "TDESC1", Icon="pin.png" },
-            //    new Models.Type{Label = "TL2", Name = "TN2", Description = "TDESC2", Icon="pin.png" },
-            //    new Models.Type{Label = "TL3", Name = "TN3", Description = "TDESC3", Icon="pin.png" },
-            //    new Models.Type{Label = "TL4", Name = "TN4", Description = "TDESC4", Icon="pin.png" },
-            //    new Models.Type{Label = "TL5", Name = "TN5", Description = "TDESC5", Icon="pin.png" },
-            //    new Models.Type{Label = "TL6", Name = "TN6", Description = "TDESC6", Icon="pin.png" },
-            //    new Models.Type{Label = "TL7", Name = "TN7", Description = "TDESC7", Icon="pin.png" },
-            //    new Models.Type{Label = "TL8", Name = "TN8", Description = "TDESC8", Icon="pin.png" },
-            //    new Models.Type{Label = "TL9", Name = "TN9", Description = "TDESC9", Icon="pin.png" },
-            //    new Models.Type{Label = "TL10", Name = "TN10", Description = "TDESC10", Icon="pin.png" },
-            //};
+            List<Models.Type> TypeList = new List<Models.Type>
+            {
+                new Models.Type{Label = "TL1", Name = "TN1", Description = "TDESC1", Icon="pin.png" },
+                new Models.Type{Label = "TL2", Name = "TN2", Description = "TDESC2", Icon="pin.png" },
+                new Models.Type{Label = "TL3", Name = "TN3", Description = "TDESC3", Icon="pin.png" },
+                new Models.Type{Label = "TL4", Name = "TN4", Description = "TDESC4", Icon="pin.png" },
+                new Models.Type{Label = "TL5", Name = "TN5", Description = "TDESC5", Icon="pin.png" },
+                new Models.Type{Label = "TL6", Name = "TN6", Description = "TDESC6", Icon="pin.png" },
+                new Models.Type{Label = "TL7", Name = "TN7", Description = "TDESC7", Icon="pin.png" },
+                new Models.Type{Label = "TL8", Name = "TN8", Description = "TDESC8", Icon="pin.png" },
+                new Models.Type{Label = "TL9", Name = "TN9", Description = "TDESC9", Icon="pin.png" },
+                new Models.Type{Label = "TL10", Name = "TN10", Description = "TDESC10", Icon="pin.png" },
+            };
 
-            //Types = new ObservableCollection<Models.Type>(TypeList);
+            Types = new ObservableCollection<Models.Type>(TypeList);
 
-            //List<Tag> TagList = new List<Tag>
-            //{
-            //    new Tag{Label = "TagL1", Description = "TagDesc1", Color = Brushes.Red},
-            //    new Tag{Label = "TagL2", Description = "TagDesc2", Color = Brushes.Blue},
-            //    new Tag{Label = "TagL3", Description = "TagDesc3", Color = Brushes.Green},
-            //    new Tag{Label = "TagL4", Description = "TagDesc4", Color = Brushes.Gray},
-            //    new Tag{Label = "TagL5", Description = "TagDesc5", Color = Brushes.Purple},
-            //};
+            List<Tag> TagList = new List<Tag>
+            {
+                new Tag{Label = "TagL1", Description = "TagDesc1", Color = Brushes.Red},
+                new Tag{Label = "TagL2", Description = "TagDesc2", Color = Brushes.Blue},
+                new Tag{Label = "TagL3", Description = "TagDesc3", Color = Brushes.Green},
+                new Tag{Label = "TagL4", Description = "TagDesc4", Color = Brushes.Gray},
+                new Tag{Label = "TagL5", Description = "TagDesc5", Color = Brushes.Purple},
+            };
 
-            //Tags = new ObservableCollection<Tag>(TagList);
+            Tags = new ObservableCollection<Tag>(TagList);
 
-            //List<Event> EventList = new List<Event> {
-            //    new Event{Label = "EA1", Name = "Djole Event", Description = "Descc", Type = Types[0], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Accesible,
-            //    Smoking = SmokingStatus.Prohibited, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(), Date = new DateTime().AddDays(1)},
+            List<Event> EventList = new List<Event> {
+                new Event{Label = "EA1", Name = "Djole Event", Description = "Descc", Type = Types[0], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Accesible,
+                Smoking = SmokingStatus.Prohibited, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(), Date = new DateTime().AddDays(1)},
 
-            //    new Event{Label = "EE2", Name = "Djole Event 2", Description = "Descc", Type = Types[1], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
-            //    Smoking = SmokingStatus.Allowed, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.High, Tags = new ObservableCollection<Tag>()
-            //    {
-            //        Tags[2],
-            //        Tags[3],
-            //    }, Date = new DateTime().AddDays(2)} ,
+                new Event{Label = "EE2", Name = "Djole Event 2", Description = "Descc", Type = Types[1], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.High, Tags = new ObservableCollection<Tag>()
+                {
+                    Tags[2],
+                    Tags[3],
+                }, Date = new DateTime().AddDays(2)} ,
 
-            //    new Event{Label = "EE3", Name = "Djole Event 3", Description = "Descc", Type = Types[2], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Accesible,
-            //    Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Elderly, Price = Price.Low, Tags = new ObservableCollection<Tag>(), Date = new DateTime().AddDays(5)},
+                new Event{Label = "EE3", Name = "Djole Event 3", Description = "Descc", Type = Types[2], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Accesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Elderly, Price = Price.Low, Tags = new ObservableCollection<Tag>(), Date = new DateTime().AddDays(5)},
 
-            //    new Event{Label = "ED4", Name = "ED4 Event 4", Description = "Descc", Type = Types[3], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
-            //    Smoking = SmokingStatus.Allowed, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Medium, Tags = new ObservableCollection<Tag>(), Date = new DateTime().AddDays(4)},
+                new Event{Label = "ED4", Name = "ED4 Event 4", Description = "Descc", Type = Types[3], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Medium, Tags = new ObservableCollection<Tag>(), Date = new DateTime().AddDays(4)},
 
-            //    new Event{Label = "EC5", Name = "EC5 Event 5", Description = "Descc", Type = TypeList[4], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Accesible,
-            //    Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.High, Tags = new ObservableCollection<Tag>(){
-            //        Tags[0],
-            //        Tags[4],
-            //    }, Date = new DateTime().AddDays(3)},
+                new Event{Label = "EC5", Name = "EC5 Event 5", Description = "Descc", Type = TypeList[4], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Accesible,
+                Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.High, Tags = new ObservableCollection<Tag>(){
+                    Tags[0],
+                    Tags[4],
+                }, Date = new DateTime().AddDays(3)},
 
-            //    new Event{Label = "EB6", Name = "Djole Event", Description = "Descc", Type = Types[5], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
-            //    Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Elderly, Price = Price.Low, Tags = new ObservableCollection<Tag>(){
-            //        Tags[2],
-            //        Tags[4],
-            //    }, Date = new DateTime().AddDays(5)},
+                new Event{Label = "EB6", Name = "Djole Event", Description = "Descc", Type = Types[5], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Elderly, Price = Price.Low, Tags = new ObservableCollection<Tag>(){
+                    Tags[2],
+                    Tags[4],
+                }, Date = new DateTime().AddDays(5)},
 
-            //    new Event{Label = "EA7", Name = "Djole Event", Description = "Descc", Type = Types[6], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Accesible,
-            //    Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Adults, Price = Price.Medium, Tags = new ObservableCollection<Tag>(){
-            //        Tags[0],
-            //        Tags[1],
-            //    }, Date = new DateTime().AddDays(7)},
+                new Event{Label = "EA7", Name = "Djole Event", Description = "Descc", Type = Types[6], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Accesible,
+                Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Adults, Price = Price.Medium, Tags = new ObservableCollection<Tag>(){
+                    Tags[0],
+                    Tags[1],
+                }, Date = new DateTime().AddDays(7)},
 
-            //    new Event{Label = "EA8", Name = "Djole Event", Description = "Descc", Type = Types[7], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
-            //    Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Elderly, Price = Price.Free, Tags = new ObservableCollection<Tag>(), Date = new DateTime()},
+                new Event{Label = "EA8", Name = "Djole Event", Description = "Descc", Type = Types[7], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Elderly, Price = Price.Free, Tags = new ObservableCollection<Tag>(), Date = new DateTime()},
 
-            //    new Event{Label = "EB9", Name = "EA1", Description = "Descc", Type = Types[8], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Accesible,
-            //    Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Medium, Tags = new ObservableCollection<Tag>(){
-            //        Tags[0],
-            //        Tags[1],
-            //        Tags[2],
-            //        Tags[3],
-            //        Tags[4],
-            //    }, Date = new DateTime()},
+                new Event{Label = "EB9", Name = "EA1", Description = "Descc", Type = Types[8], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Accesible,
+                Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Medium, Tags = new ObservableCollection<Tag>(){
+                    Tags[0],
+                    Tags[1],
+                    Tags[2],
+                    Tags[3],
+                    Tags[4],
+                }, Date = new DateTime()},
 
-            //    new Event{Label = "EC10", Name = "Djole Event", Description = "Descc", Type = Types[9], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
-            //    Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.High, Tags = new ObservableCollection<Tag>(){
-            //        Tags[1],
-            //        Tags[2],
-            //    }, Date = new DateTime()},
+                new Event{Label = "EC10", Name = "Djole Event", Description = "Descc", Type = Types[9], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.High, Tags = new ObservableCollection<Tag>(){
+                    Tags[1],
+                    Tags[2],
+                }, Date = new DateTime()},
 
-            //    new Event{Label = "ED11", Name = "Djole Event", Description = "Descc", Type = Types[0], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Accesible,
-            //    Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Low, Tags = new ObservableCollection<Tag>(){
-            //        Tags[0],
-            //        Tags[3],
-            //    }, Date = new DateTime()},
+                new Event{Label = "ED11", Name = "Djole Event", Description = "Descc", Type = Types[0], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Accesible,
+                Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Low, Tags = new ObservableCollection<Tag>(){
+                    Tags[0],
+                    Tags[3],
+                }, Date = new DateTime()},
 
-            //    new Event{Label = "EE12", Name = "Djole Event", Description = "Descc", Type = Types[1], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
-            //    Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(){
-            //        Tags[0],
-            //        Tags[1],
-            //        Tags[2],
-            //    }, Date = new DateTime()},
+                new Event{Label = "EE12", Name = "Djole Event", Description = "Descc", Type = Types[1], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(){
+                    Tags[0],
+                    Tags[1],
+                    Tags[2],
+                }, Date = new DateTime()},
 
-            //    new Event{Label = "EC13", Name = "Djole Event", Description = "Descc", Type = Types[2], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
-            //    Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.High, Tags = new ObservableCollection<Tag>(){
-            //        Tags[3],
-            //        Tags[4],
-            //    }, Date = new DateTime()},
+                new Event{Label = "EC13", Name = "Djole Event", Description = "Descc", Type = Types[2], Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.High, Tags = new ObservableCollection<Tag>(){
+                    Tags[3],
+                    Tags[4],
+                }, Date = new DateTime()},
 
-            //    new Event{Label = "ED14", Name = "Djole Event", Description = "Descc", Type = Types[3], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Accesible,
-            //    Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Low, Tags = new ObservableCollection<Tag>(){
-            //        Tags[2],
-            //        Tags[3],
-            //    }, Date = new DateTime()},
+                new Event{Label = "ED14", Name = "Djole Event", Description = "Descc", Type = Types[3], Alcohol = AlcoholStatus.Allowed, Icon="pin.png", Handicap = HandicapStatus.Accesible,
+                Smoking = SmokingStatus.Prohibited, Space = Space.Outdoors, Audience = TargetAudience.Children, Price = Price.Low, Tags = new ObservableCollection<Tag>(){
+                    Tags[2],
+                    Tags[3],
+                }, Date = new DateTime()},
 
-            //    new Event{Label = "EE15", Name = "Djole Event", Description = "Descc", Type = Types[4], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
-            //    Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(){
-            //        Tags[0],
-            //        Tags[1],
-            //    }, Date = new DateTime()}
-            //};
+                new Event{Label = "EE15", Name = "Djole Event", Description = "Descc", Type = Types[4], Alcohol = AlcoholStatus.Sold, Icon="pin.png", Handicap = HandicapStatus.Inaccesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(){
+                    Tags[0],
+                    Tags[1],
+                }, Date = new DateTime()}
+            };
 
-            //Events = new ObservableCollection<Event>(EventList);
+            Events = new ObservableCollection<Event>(EventList);
 
-            //eventHelper.JsonSerialize(Events, "events.json");
-            //tagHelper.JsonSerialize(Tags, "tags.json");
-            //typeHelper.JsonSerialize(Types, "types.json");
+            eventHelper.JsonSerialize(Events, "events.json");
+            tagHelper.JsonSerialize(Tags, "tags.json");
+            typeHelper.JsonSerialize(Types, "types.json");
 
 
-            Tags = tagHelper.JsonDeserialize("tags.json");
-            Types = typeHelper.JsonDeserialize("types.json");
-            Events = eventHelper.JsonDeserialize("events.json");
+            try
+            {
+                Tags = tagHelper.JsonDeserialize("tags.json");
+                Types = typeHelper.JsonDeserialize("types.json");
+                Events = eventHelper.JsonDeserialize("events.json");
+            }
+            catch (Exception)
+            {
+                Tags = new ObservableCollection<Tag>();
+                Types = new ObservableCollection<Models.Type>();
+                Events = new ObservableCollection<Event>();
+            }
+            
 
             canvases = new List<Canvas>
             {
@@ -304,16 +329,50 @@ namespace HCI_Projekat2
         {
             if (obj != null)
             {
+                Event ev = obj as Event;
+                for (int i = 0; i < canvases.Count; i++)
+                {
+                    foreach (FrameworkElement fe in canvases[i].Children)
+                    {
+                        if (fe.Tag.Equals(ev.Label))
+                            fe.Visibility = Visibility.Visible;
+                    }
+                }
+
                 if (!SearchLabel.Text.Equals(""))
                 {
                     SearchPredicate search = new SearchPredicate(SearchLabel.Text);
-                    if (!search.IsMatch((Event)obj))
+                    if (!search.IsMatch(ev))
                         return false;
                 }
 
-                if (Display_Map.IsChecked == true && ((Event)obj).Points[Maps.SelectedIndex].X == -1)
+                bool[] map = new bool[2];
+                bool map_final = false;
+                bool map_usage = false;
+                bool map_usage_show = false;
+                bool map_usage_hide = false;
+
+                if (Display_Map.IsChecked == true)
                 {
-                    return false;
+                    map_usage = true;
+                    map_usage_show = true;
+                    map[0] = (ev).Points[Maps.SelectedIndex].X != -1;
+                }
+
+                if (Display_NoMap.IsChecked == true)
+                {
+                    map_usage = true;
+                    map_usage_hide = true;
+                    map[1] = (ev).Points[Maps.SelectedIndex].X == -1;
+                }
+
+                foreach (bool var in map)
+                {
+                    if (var)
+                    {
+                        map_final = true;
+                        break;
+                    }
                 }
 
                 bool[] alchohol = new bool[3];
@@ -322,19 +381,19 @@ namespace HCI_Projekat2
                 if (Alchohol_Allowed.IsChecked == true)
                 {
                     alchohol_usage = true;
-                    alchohol[0] = ((Event)obj).Alcohol.Equals(AlcoholStatus.Allowed);
+                    alchohol[0] = (ev).Alcohol.Equals(AlcoholStatus.Allowed);
                 }
 
                 if (Alchohol_Prohibited.IsChecked == true) 
                 {
                     alchohol_usage = true;
-                    alchohol[1] = ((Event)obj).Alcohol.Equals(AlcoholStatus.Prohibited);
+                    alchohol[1] = (ev).Alcohol.Equals(AlcoholStatus.Prohibited);
                 }
 
                 if (Alchohol_Sold.IsChecked == true)
                 {
                     alchohol_usage = true;
-                    alchohol[2] = ((Event)obj).Alcohol.Equals(AlcoholStatus.Sold);
+                    alchohol[2] = (ev).Alcohol.Equals(AlcoholStatus.Sold);
                 }
 
                 foreach (bool var in alchohol) {
@@ -352,13 +411,13 @@ namespace HCI_Projekat2
                 if (Handicap_Accessible.IsChecked == true)
                 {
                     handicap_usage = true;
-                    handicap[0] = ((Event)obj).Handicap.Equals(HandicapStatus.Accesible);
+                    handicap[0] = (ev).Handicap.Equals(HandicapStatus.Accesible);
                 }
 
                 if (Handicap_Inaccesible.IsChecked == true)
                 {
                     handicap_usage = true;
-                    handicap[1] = ((Event)obj).Handicap.Equals(HandicapStatus.Inaccesible);
+                    handicap[1] = (ev).Handicap.Equals(HandicapStatus.Inaccesible);
                 }
 
                 foreach (bool var in handicap)
@@ -377,13 +436,13 @@ namespace HCI_Projekat2
                 if (Smoking_Allowed.IsChecked == true)
                 {
                     smoking_usage = true;
-                    smoking[0] = ((Event)obj).Smoking.Equals(SmokingStatus.Allowed);
+                    smoking[0] = (ev).Smoking.Equals(SmokingStatus.Allowed);
                 }
 
                 if (Smoking_Prohibited.IsChecked == true)
                 {
                     smoking_usage = true;
-                    smoking[1] = ((Event)obj).Smoking.Equals(SmokingStatus.Prohibited);
+                    smoking[1] = (ev).Smoking.Equals(SmokingStatus.Prohibited);
                 }
 
                 foreach (bool var in smoking)
@@ -401,13 +460,13 @@ namespace HCI_Projekat2
                 if (Space_Indoors.IsChecked == true)
                 {
                     space_usage = true;
-                    space[0] = ((Event)obj).Space.Equals(Space.Indoors);
+                    space[0] = (ev).Space.Equals(Space.Indoors);
                 }
 
                 if (Space_Outdoors.IsChecked == true)
                 {
                     space_usage = true;
-                    space[1] = ((Event)obj).Space.Equals(Space.Outdoors);
+                    space[1] = (ev).Space.Equals(Space.Outdoors);
                 }
 
                 foreach (bool var in space)
@@ -425,19 +484,19 @@ namespace HCI_Projekat2
                 if (Audience_Adults.IsChecked == true)
                 {
                     audience_usage = true;
-                    audience[0] = ((Event)obj).Audience.Equals(TargetAudience.Adults);
+                    audience[0] = (ev).Audience.Equals(TargetAudience.Adults);
                 }
 
                 if (Audience_Children.IsChecked == true)
                 {
                     audience_usage = true;
-                    audience[1] = ((Event)obj).Audience.Equals(TargetAudience.Children);
+                    audience[1] = (ev).Audience.Equals(TargetAudience.Children);
                 }
 
                 if (Audience_Elderly.IsChecked == true)
                 {
                     audience_usage = true;
-                    audience[2] = ((Event)obj).Audience.Equals(TargetAudience.Elderly);
+                    audience[2] = (ev).Audience.Equals(TargetAudience.Elderly);
                 }
 
                 foreach (bool var in audience)
@@ -455,25 +514,25 @@ namespace HCI_Projekat2
                 if (Price_Free.IsChecked == true)
                 {
                     price_usage = true;
-                    price[0] = ((Event)obj).Price.Equals(Price.Free);
+                    price[0] = (ev).Price.Equals(Price.Free);
                 }
 
                 if (Price_High.IsChecked == true)
                 {
                     price_usage = true;
-                    price[1] = ((Event)obj).Price.Equals(Price.High);
+                    price[1] = (ev).Price.Equals(Price.High);
                 }
 
                 if (Price_Low.IsChecked == true)
                 {
                     price_usage = true;
-                    price[2] = ((Event)obj).Price.Equals(Price.Low);
+                    price[2] = (ev).Price.Equals(Price.Low);
                 }
 
                 if (Price_Medium.IsChecked == true)
                 {
                     price_usage = true;
-                    price[3] = ((Event)obj).Price.Equals(Price.Medium);
+                    price[3] = (ev).Price.Equals(Price.Medium);
                 }
 
                 foreach (bool var in price)
@@ -565,6 +624,29 @@ namespace HCI_Projekat2
                     first_usage = false;
                 }
 
+
+                if (!final)
+                {
+                    for (int i = 0; i < canvases.Count; i++)
+                    {
+                        foreach (FrameworkElement fe in canvases[i].Children)
+                        {
+                            if (fe.Tag.Equals(ev.Label))
+                                fe.Visibility = Visibility.Hidden;
+                        }
+                    }
+                }
+
+                if (map_usage)
+                {
+                    if (first_usage)
+                        final = map_final;
+                    else
+                    {
+                        final = final && map_final;
+                    }
+                }
+
                 return final;
             }
             return true;
@@ -610,8 +692,8 @@ namespace HCI_Projekat2
 
             if (e.LeftButton == MouseButtonState.Pressed &&
                 !viewer.IsMouseCaptureWithin && 
-                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+                (Math.Abs(diff.X) > 10*SystemParameters.MinimumHorizontalDragDistance ||
+                Math.Abs(diff.Y) > 10*SystemParameters.MinimumVerticalDragDistance))
             {
                 // Get the dragged ListViewItem
                 DataGrid dataGrid = sender as DataGrid;
@@ -625,14 +707,7 @@ namespace HCI_Projekat2
                 {
                     return;
                 }
-                // #1 Treba prozor da se implementira
-                foreach (FrameworkElement fe in activeCanvas.Children)
-                {
-                    if (fe.Name.Equals(selectedEvent.Label))
-                    {
-                        return;
-                    }
-                }
+
                 // Initialize the drag & drop operation
                 DataObject dragData = new DataObject("eventFormat", selectedEvent);
                 DragDrop.DoDragDrop(img, dragData, DragDropEffects.Move);
@@ -649,11 +724,19 @@ namespace HCI_Projekat2
 
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
-            double foundElementX = backupX;
-            double foundElementY = backupY;
+            double foundElementX = oldPos.X;
+            double foundElementY = oldPos.Y;
             if (e.Data.GetDataPresent("eventFormat"))
             {
                 Event m = e.Data.GetData("eventFormat") as Event;
+                foreach (FrameworkElement fe in activeCanvas.Children)
+                {
+                    if (fe.Name.Equals(m.Label))
+                    {
+                        MessageBox.Show("This event already exists on map!", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
                 Image img = new Image();
                 img.Source = new BitmapImage(new Uri(m.Icon, UriKind.RelativeOrAbsolute));
                 img.Name = m.Label;
@@ -673,15 +756,24 @@ namespace HCI_Projekat2
                     r2 = new Rect(Canvas.GetLeft(fe), Canvas.GetTop(fe), fe.ActualWidth, fe.ActualHeight);
                     if (r1.IntersectsWith(r2))
                     {
+                        if(oldPos.X == -1)
+                        {
+                            MessageBox.Show("Please choose another spot on map!", "Warning", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            return;
+                        }
                         (sender as Canvas).Children.Add(img);
                         Canvas.SetLeft(img, foundElementX);
                         Canvas.SetTop(img, foundElementY);
 
-                        TextBlock eventName2= new TextBlock
+                        TextBlock eventName2 = new TextBlock
                         {
                             Text = img.Name,
                             Tag = img.Name,
-                            Foreground = Brushes.Black
+                            Foreground = Brushes.Black,
+                            FontSize = 14.0,
+                            Background = Brushes.White,
+                            FontWeight = FontWeights.Bold,
+                            Padding = new Thickness(3)
                         };
                         (sender as Canvas).Children.Add(eventName2);
                         Canvas.SetLeft(eventName2, Canvas.GetLeft(img));
@@ -699,6 +791,103 @@ namespace HCI_Projekat2
                 m.Points[Maps.SelectedIndex].X = positionX;
                 m.Points[Maps.SelectedIndex].Y = positionY;
 
+                WrapPanel wp = new WrapPanel();
+                wp.Orientation = Orientation.Vertical;
+                wp.MaxWidth = 300;
+
+                TextBlock nameTxtBlock = new TextBlock();
+                nameTxtBlock.TextWrapping = TextWrapping.Wrap;
+                nameTxtBlock.FontSize = 14;
+                nameTxtBlock.Text = "Name: " + m.Name;
+                wp.Children.Add(nameTxtBlock);
+
+                TextBlock typeTxtBlock = new TextBlock();
+                typeTxtBlock.TextWrapping = TextWrapping.Wrap;
+                typeTxtBlock.FontSize = 14;
+                typeTxtBlock.Text = "Type: " + m.Type.Label;
+                wp.Children.Add(typeTxtBlock);
+
+                TextBlock dateTxtBlock = new TextBlock();
+                dateTxtBlock.TextWrapping = TextWrapping.Wrap;
+                dateTxtBlock.FontSize = 14;
+                dateTxtBlock.Text = "Date: " + m.FormattedDate;
+                wp.Children.Add(dateTxtBlock);
+
+                TextBlock alcoholTxtBlock = new TextBlock();
+                alcoholTxtBlock.TextWrapping = TextWrapping.Wrap;
+                alcoholTxtBlock.FontSize = 14;
+                alcoholTxtBlock.Text = "Alcohol: " + m.Alcohol;
+                wp.Children.Add(alcoholTxtBlock);
+
+                TextBlock handicapTxtBlock = new TextBlock();
+                handicapTxtBlock.TextWrapping = TextWrapping.Wrap;
+                handicapTxtBlock.FontSize = 14;
+                handicapTxtBlock.Text = "Handicap: " + m.Handicap;
+                wp.Children.Add(handicapTxtBlock);
+
+                TextBlock smokingTxtBlock = new TextBlock();
+                smokingTxtBlock.TextWrapping = TextWrapping.Wrap;
+                smokingTxtBlock.FontSize = 14;
+                smokingTxtBlock.Text = "Smoking: " + m.Smoking;
+                wp.Children.Add(smokingTxtBlock);
+
+                TextBlock spaceTxtBlock = new TextBlock();
+                spaceTxtBlock.TextWrapping = TextWrapping.Wrap;
+                spaceTxtBlock.FontSize = 14;
+                spaceTxtBlock.Text = "Space: " + m.Space;
+                wp.Children.Add(spaceTxtBlock);
+
+                TextBlock audienceTxtBlock = new TextBlock();
+                audienceTxtBlock.TextWrapping = TextWrapping.Wrap;
+                audienceTxtBlock.FontSize = 14;
+                audienceTxtBlock.Text = "Audience: " + m.Audience;
+                wp.Children.Add(audienceTxtBlock);
+
+                TextBlock priceTxtBlock = new TextBlock();
+                priceTxtBlock.TextWrapping = TextWrapping.Wrap;
+                priceTxtBlock.FontSize = 14;
+                priceTxtBlock.Text = "Price: " + m.Price;
+                wp.Children.Add(priceTxtBlock);
+
+                TextBlock tagTxtBlock = new TextBlock();
+                tagTxtBlock.TextWrapping = TextWrapping.Wrap;
+                tagTxtBlock.FontSize = 14;
+                if (m.Tags.ToList().Count == 0)
+                {
+                    tagTxtBlock.Text = "No tags";
+                    wp.Children.Add(tagTxtBlock);
+                }
+                else
+                {
+                    tagTxtBlock.Text = "Tags";
+                    WrapPanel wpTags = new WrapPanel();
+                    Border tagBorder;
+                    Label tagLabel;
+                    foreach (Tag item in m.Tags)
+                    {
+                        tagBorder = new Border();
+                        tagBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
+                        tagBorder.Background = item.Color;
+                        tagBorder.BorderThickness = new Thickness(1.5);
+                        tagBorder.CornerRadius = new CornerRadius(6);
+
+                        tagLabel = new Label();
+                        tagLabel.FontSize = 14;
+                        tagLabel.Content = item.Label;
+                        tagLabel.Foreground = new SolidColorBrush(Colors.White);
+                        tagLabel.Margin = new Thickness(0, 0, 3, 3);
+                        tagLabel.Padding = new Thickness(2, 0, 2, 0);
+
+                        tagBorder.Child = tagLabel;
+                        wpTags.Children.Add(tagBorder);
+                    }
+                    wp.Children.Add(tagTxtBlock);
+                    wp.Children.Add(wpTags);
+                }
+                ToolTip tt = new ToolTip();
+                tt.Content = wp;
+                img.ToolTip = tt;
+
                 (sender as Canvas).Children.Add(img);
                 Canvas.SetLeft(img, positionX - img.Width / 2.0);
                 Canvas.SetTop(img, positionY - img.Height / 2.0);
@@ -707,12 +896,17 @@ namespace HCI_Projekat2
                 {
                     Text = img.Name,
                     Tag = img.Name,
-                    Foreground = Brushes.Black
+                    Foreground = Brushes.Black,
+                    FontSize = 14.0,
+                    Background = Brushes.White,
+                    FontWeight = FontWeights.Bold,
+                    Padding = new Thickness(3)
                 };
                 (sender as Canvas).Children.Add(eventName);
                 Canvas.SetLeft(eventName, Canvas.GetLeft(img));
                 Canvas.SetTop(eventName, Canvas.GetTop(img) - img.Height / 2.0);
 
+                View.Refresh();
                 eventHelper.JsonSerialize(Events, "events.json");
             }
         }
@@ -760,8 +954,6 @@ namespace HCI_Projekat2
                Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {               
                 Image img = sender as Image;
-                backupY = Canvas.GetTop(img);
-                backupX = Canvas.GetLeft(img);
                 Canvas canvas = img.Parent as Canvas;
                 canvas.Children.Remove(img);
 
@@ -786,12 +978,13 @@ namespace HCI_Projekat2
                 e.Handled = true;
             }
 
-        }
 
+        }
+        /*
         Point scrollMousePoint = new Point();
         double hOff = 1;
         double vOff = 1;
-
+        
         private void ScrollViewer_PreviewMouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
             
@@ -830,7 +1023,7 @@ namespace HCI_Projekat2
                 scrollViewer.ScrollToVerticalOffset(vOff + (scrollMousePoint.Y - e.GetPosition(scrollViewer).Y));
             }
         }
-
+        */
         private void RefreshView(object sender, RoutedEventArgs e)
         {
             View?.Refresh();
@@ -870,6 +1063,7 @@ namespace HCI_Projekat2
             Space_Outdoors.IsChecked = false;
 
             Display_Map.IsChecked = false;
+            Display_NoMap.IsChecked = false;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -975,13 +1169,20 @@ namespace HCI_Projekat2
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            IsCheckedState = !IsCheckedState;
             if(AllTabs.Visibility == Visibility.Hidden)
             {
-                LeftCol.Width = new GridLength(800.0);
+                ImageBrush brush = new ImageBrush((new BitmapImage(new Uri("levo.png", UriKind.RelativeOrAbsolute))));
+                brush.Stretch = Stretch.Uniform;
+                BtnImg.Background = brush;
+                LeftCol.Width = new GridLength(900.0);
                 AllTabs.Visibility = Visibility.Visible;
             }
             else
             {
+                ImageBrush brush = new ImageBrush((new BitmapImage(new Uri("desno.png", UriKind.RelativeOrAbsolute))));
+                brush.Stretch = Stretch.Uniform;
+                BtnImg.Background = brush;
                 LeftCol.Width = new GridLength(50.0);
                 AllTabs.Visibility = Visibility.Hidden;
             }            
@@ -1074,7 +1275,11 @@ namespace HCI_Projekat2
                         Text = img.Name,
                         Tag = img.Tag,
                         Name = img.Name,
-                        Foreground = Brushes.Black
+                        Foreground = Brushes.Black,
+                        FontSize = 14.0,
+                        Background = Brushes.White,
+                        FontWeight = FontWeights.Bold,
+                        Padding = new Thickness(3)
                     };
                     canvases[i].Children.Add(eventName);
                     Canvas.SetLeft(eventName, Canvas.GetLeft(img));

@@ -20,9 +20,39 @@ namespace HCI_Projekat2.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Label { get; set; }
+        private string _label;
+        public string Label
+        {
+            get
+            {
+                return _label;
+            }
+            set
+            {
+                if (value != _label)
+                {
+                    _label = value;
+                    OnPropertyChanged("Label");
+                }
+            }
+        }
         public DateTime Date { get; set; }
-        public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
+        }
         public string Description { get; set; }
         public Type Type { get; set; }
         public AlcoholStatus Alcohol { get; set; }

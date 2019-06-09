@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("map.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("desno.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("levo.png")]
 
 

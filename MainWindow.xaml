@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_Projekat2"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized" Width="1920" Height="1080">
+        Title="MainWindow" WindowState="Maximized" Width="1920" Height="1080"
+        FontSize="14">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Padding" Value="2px"/>
         </Style>
-        
+
         <Style TargetType="DataGridCell">
             <Style.Triggers>
                 <Trigger Property="DataGridCell.IsSelected" Value="True">
@@ -19,11 +20,36 @@
                     <Setter Property="BorderThickness" Value="0"/>
                 </Trigger>
             </Style.Triggers>
-        </Style>        
+        </Style>
+
+        <!-- This style is used for buttons, to remove the WPF default 'animated' mouse over effect -->
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                        BorderThickness="1"
+                        Padding="4,2" 
+                        BorderBrush="DarkGray" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="LeftCol" Width="800"></ColumnDefinition>            
+            <ColumnDefinition Name="LeftCol" Width="900px"></ColumnDefinition>            
             <ColumnDefinition Name="RightCol" Width="*"></ColumnDefinition>         
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -34,15 +60,19 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="50px"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Click="Button_Click_3" >Sh/Hide</Button>
+            <Button Name="BtnImg" Style="{StaticResource MyButtonStyle}" Grid.Column="1" Click="Button_Click_3">
+                <Button.Background>
+                    <ImageBrush ImageSource="levo.png" Stretch="Uniform" ></ImageBrush>
+                </Button.Background>
+            </Button>
             <TabControl Grid.Row="0" Grid.Column="0" Name="AllTabs">
-                <TabItem Header="Events" Width="200">
+                <TabItem Header="Events" Width="286" Height="30">
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="4*"></RowDefinition>
+                            <RowDefinition Height="5*"></RowDefinition>
                             <RowDefinition Height="20*"></RowDefinition>
                             <RowDefinition Height="1.2*"></RowDefinition>
                         </Grid.RowDefinitions>
@@ -69,7 +99,8 @@
                                 <TextBox Name="SearchLabel" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="SearchBtn_Click"/>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Search:"/>
                                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5">
-                                    <CheckBox Name="Display_Map" Checked="RefreshView" Unchecked="RefreshView">Show only Events on map</CheckBox>
+                                    <CheckBox Name="Display_Map" Checked="RefreshView" Unchecked="RefreshView" Margin="0 0 25 0">Show Events on map</CheckBox>
+                                    <CheckBox Name="Display_NoMap" Checked="RefreshView" Unchecked="RefreshView">Show Events not on map</CheckBox>
                                 </StackPanel>
                                 <Button Grid.Row="2" Grid.Column="10" Click="Button_Click">Reset filter</Button>
                                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
@@ -172,17 +203,24 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
+                                <DataGrid.RowDetailsTemplate>
+                                    <DataTemplate>
+                                        <Border>
+                                            <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding Description}"  VerticalAlignment="Center" />
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
                         </DataGrid>
                         <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click_1">New event</Button>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Types" Width="200">
+                <TabItem Header="Types" Width="280">
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1.6*"></RowDefinition>
+                            <RowDefinition Height="2*"></RowDefinition>
                             <RowDefinition Height="20*"></RowDefinition>
                             <RowDefinition Height="1.2*"></RowDefinition>
                         </Grid.RowDefinitions>
@@ -244,13 +282,13 @@
                         <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click_2">New type</Button>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Tags" Width="200">
+                <TabItem Header="Tags" Width="280">
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.9*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="20*"></RowDefinition>
                             <RowDefinition Height="1.2*"></RowDefinition>
                         </Grid.RowDefinitions>
@@ -310,36 +348,36 @@
             </TabControl>
         </Grid>        
         <TabControl Grid.Row="0" Grid.Column="1" SelectionChanged="TabControl_SelectionChanged" Name="Maps">
-            <TabItem Header="Map1">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer1" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
-                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="1500" Height="1500" Name="Canvas1">
+            <TabItem Header="Map1" Height="30" Width="100">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer1">
+                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="2000" Height="2000" Name="Canvas1">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />
                         </Canvas.Background>
                     </Canvas>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Map2">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer2" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
-                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="1500" Height="1500" Name="Canvas2">
+            <TabItem Header="Map2" Width="100">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer2">
+                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="2000" Height="2000" Name="Canvas2">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />
                         </Canvas.Background>
                     </Canvas>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Map3">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer3" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
-                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="1500" Height="1500" Name="Canvas3">
+            <TabItem Header="Map3" Width="100">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer3" >
+                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="2000" Height="2000" Name="Canvas3">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />
                         </Canvas.Background>
                     </Canvas>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Map4">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer4" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
-                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="1500" Height="1500" Name="Canvas4">
+            <TabItem Header="Map4" Width="100">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer4" >
+                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="2000" Height="2000" Name="Canvas4">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />
                         </Canvas.Background>

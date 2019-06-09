@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_Projekat2"        
         mc:Ignorable="d"
-        Title="TagModal" Height="450" Width="800" Closing="Closing_Click">
+        Title="TagModal" Height="450" Width="800" Closing="Closing_Click"
+        FontSize="14">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>

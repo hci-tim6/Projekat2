@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"        
         mc:Ignorable="d"
-        Title="Event" Height="500" Width="500" ResizeMode="NoResize" Closing="Closing_Click">
+        Title="Event" Height="500" Width="500" ResizeMode="NoResize" Closing="Closing_Click"
+        FontSize="14">
     <Grid Margin="20">        
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>

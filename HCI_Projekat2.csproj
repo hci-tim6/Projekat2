@@ -73,6 +73,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DragTutorial.xaml.cs">
+      <DependentUpon>DragTutorial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper\EventsHelper.cs" />
     <Compile Include="Helper\TagHelper.cs" />
     <Compile Include="Helper\TypeHelper.cs" />
@@ -86,6 +89,10 @@
     <Compile Include="TypeModal.xaml.cs">
       <DependentUpon>TypeModal.xaml</DependentUpon>
     </Compile>
+    <Page Include="DragTutorial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EventModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +173,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="desno.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="levo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

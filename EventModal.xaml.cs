@@ -357,17 +357,23 @@ namespace HCI_Projekat2
                 if (foundImg != null)
                 {
                     (foundTxt as TextBlock).Text = String.Copy(Event.Label);
-                    
+                    foundTxt.Tag = String.Copy(Event.Label);
+                    foundTxt.Name = String.Copy(Event.Label);
+
                     ((Image)foundImg).Source = new BitmapImage(new Uri(Event.Icon, UriKind.RelativeOrAbsolute));
+                    foundImg.Tag = String.Copy(Event.Label);
+                    foundImg.Name = String.Copy(Event.Label);
+
                 }
             }
             (Owner as MainWindow).View.Refresh();
             (Owner as MainWindow).TableEvent.ScrollIntoView(Event);
             (Owner as MainWindow).TableEvent.SelectedItem = Event;
+            (Owner as MainWindow).SelectedEvent = Event;
             Backup_Tags = Event.Tags;
             backupDateTime = Event.Date;
             Backup_Icon = Event.Icon;
-            _backupEvent = Event;
+            _backupEvent = new Event(Event);
             Close();
         }
 
