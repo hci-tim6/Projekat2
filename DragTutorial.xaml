@@ -5,16 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_Projekat2"
         mc:Ignorable="d"
-        Title="DragTutorial" Height="450" Width="900">
+        Title="DragTutorial" Height="500" Width="1200" ResizeMode="NoResize" Closing="Window_Closing">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Padding" Value="2px"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Style.Triggers>
+                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                    <Setter Property="Background" Value="#4169e1" />
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Canvas DragEnter="Canvas_DragEnterTutorial" Drop="Canvas_DropTutorial" AllowDrop="True" Grid.Row="1" Grid.Column="1" Name="TutorialCanvas">
+            <Canvas.Background>
+                <ImageBrush ImageSource="map.png" Stretch="None" />
+            </Canvas.Background>
+        </Canvas>
         <DataGrid Name="TableEvent" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Events}" IsReadOnly="True" RowHeaderWidth="0"
                               AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" HorizontalScrollBarVisibility="Disabled"
                               MouseLeftButtonDown="TableEvent_PreviewMouseLeftButtonDown" MouseMove="TableEvent_MouseMove">
@@ -63,10 +83,10 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDown">
+                                <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                                     <Image Width="30" Height="30" Source="edit.png"/>
                                 </Button>
-                                <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDownDelete">
+                                <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
                                     <Image Width="30" Height="30" Source="delete.png"/>
                                 </Button>
                             </StackPanel>

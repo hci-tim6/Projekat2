@@ -1328,5 +1328,15 @@ namespace HCI_Projekat2
         {
             typeHelper.JsonDeserialize("types.json");
         }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            var tutorial = new DragTutorial(this);
+            foreach (Canvas c in canvases)
+            {
+                c.AllowDrop = false;
+            }
+            tutorial.ShowDialog();            
+        }
     }
 }

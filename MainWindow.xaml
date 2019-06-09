@@ -72,7 +72,7 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="5*"></RowDefinition>
+                            <RowDefinition Height="5*" MinHeight="200px"></RowDefinition>
                             <RowDefinition Height="20*"></RowDefinition>
                             <RowDefinition Height="1.2*"></RowDefinition>
                         </Grid.RowDefinitions>
@@ -346,8 +346,9 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-        </Grid>        
-        <TabControl Grid.Row="0" Grid.Column="1" SelectionChanged="TabControl_SelectionChanged" Name="Maps">
+        </Grid>
+        <Button Panel.ZIndex="2" Grid.Row="0" Grid.Column="1" Width="30" Height="30" VerticalAlignment="top" HorizontalAlignment="Right" Margin="2 2 10 2" Click="Button_Click_4"></Button>
+        <TabControl Panel.ZIndex="1" Grid.Row="0" Grid.Column="1" SelectionChanged="TabControl_SelectionChanged" Name="Maps">
             <TabItem Header="Map1" Height="30" Width="100">
                 <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer1">
                     <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="2000" Height="2000" Name="Canvas1">
@@ -384,6 +385,6 @@
                     </Canvas>
                 </ScrollViewer>
             </TabItem>
-        </TabControl>       
+        </TabControl>
     </Grid>
 </Window>
