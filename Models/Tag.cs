@@ -29,6 +29,11 @@ namespace HCI_Projekat2.Models
             }
         }
 
+        public Tag()
+        {
+            Label = "";
+        }
+
         public virtual void OnPropertyChanged(string v)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
@@ -37,6 +42,20 @@ namespace HCI_Projekat2.Models
         public override string ToString()
         {
             return Label;
+        }
+        public override bool Equals(Object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+
+                Tag tag = (Tag)obj;
+                return this.Label.Equals(tag.Label);
+            }
         }
     }
 }

@@ -62,12 +62,15 @@
                                     <ColumnDefinition Width="3*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"></RowDefinition>
+                                    <RowDefinition Height="1.2*"></RowDefinition>
                                     <RowDefinition Height="4.5*"></RowDefinition>
                                     <RowDefinition Height="1*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBox Name="SearchLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10"/>
-                                <Button Grid.Row="0" Grid.Column="10" Click="SearchBtn_Click">Search</Button>
+                                <TextBox Name="SearchLabel" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="SearchBtn_Click"/>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Search:"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5">
+                                    <CheckBox Name="Display_Map" Checked="RefreshView" Unchecked="RefreshView">Show only Events on map</CheckBox>
+                                </StackPanel>
                                 <Button Grid.Row="2" Grid.Column="10" Click="Button_Click">Reset filter</Button>
                                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
                                     <Label>Alcohol:</Label>
@@ -138,7 +141,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ItemsControl ItemsSource="{Binding Tags}">
-                                                <ItemsControl.ItemTemplate>
+                                                <ItemsControl.ItemTemplate >
                                                     <DataTemplate>
                                                         <Border BorderBrush="#FF000000" Background="{Binding Color}" BorderThickness="1.5" CornerRadius="6">
                                                             <Label Content="{Binding Label}" Foreground="White" Margin="0, 0, 3, 3" Padding="2, 0"></Label>
@@ -162,7 +165,7 @@
                                                     <Image Width="30" Height="30" Source="edit.png"/>
                                                 </Button>
                                                 <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDownDelete">
-                                                    <Image Width="30" Height="30" Source="delete.jpg"/>
+                                                    <Image Width="30" Height="30" Source="delete.png"/>
                                                 </Button>
                                             </StackPanel>
                                         </DataTemplate>
@@ -179,10 +182,36 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="4*"></RowDefinition>
+                            <RowDefinition Height="1.6*"></RowDefinition>
                             <RowDefinition Height="20*"></RowDefinition>
                             <RowDefinition Height="1.2*"></RowDefinition>
                         </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="#FFF0F0F0" Padding="5" Margin="0 0 0 5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.8*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Search:"/>
+                                <TextBox Name="SearchTypes" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="RefreshTypes"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Margin="0 8 0 0">
+                                    <CheckBox Name="Display_Unused_Types" Checked="RefreshTypes" Unchecked="RefreshTypes">Show only unused types</CheckBox>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
                         <DataGrid Name="TableType" Grid.Row="1" ItemsSource="{Binding Path=Types}" IsReadOnly="True" RowHeaderWidth="0"
                               AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" HorizontalScrollBarVisibility="Disabled">
                             <DataGrid.Columns>
@@ -204,7 +233,7 @@
                                                     <Image Width="30" Height="30" Source="edit.png"/>
                                                 </Button>
                                                 <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Type_PreviewMouseLeftButtonDownDelete">
-                                                    <Image Width="30" Height="30" Source="delete.jpg"/>
+                                                    <Image Width="30" Height="30" Source="delete.png"/>
                                                 </Button>
                                             </StackPanel>
                                         </DataTemplate>
@@ -221,10 +250,32 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="4*"></RowDefinition>
+                            <RowDefinition Height="0.9*"></RowDefinition>
                             <RowDefinition Height="20*"></RowDefinition>
                             <RowDefinition Height="1.2*"></RowDefinition>
                         </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="#FFF0F0F0" Padding="5" Margin="0 0 0 5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Search:"/>
+                                <TextBox Name="SearchTags" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="RefreshTags"/>
+                            </Grid>
+                        </Border>
                         <DataGrid Name="TableTag" Grid.Row="1" ItemsSource="{Binding Path=Tags}" IsReadOnly="True" RowHeaderWidth="0"
                               AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" HorizontalScrollBarVisibility="Disabled">
                             <DataGrid.Columns>
@@ -245,7 +296,7 @@
                                                     <Image Width="30" Height="30" Source="edit.png"/>
                                                 </Button>
                                                 <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" PreviewMouseLeftButtonDown="Tag_PreviewMouseLeftButtonDownDelete">
-                                                    <Image Width="30" Height="30" Source="delete.jpg"/>
+                                                    <Image Width="30" Height="30" Source="delete.png"/>
                                                 </Button>
                                             </StackPanel>
                                         </DataTemplate>
@@ -258,10 +309,10 @@
                 </TabItem>
             </TabControl>
         </Grid>        
-        <TabControl Grid.Row="0" Grid.Column="1">
+        <TabControl Grid.Row="0" Grid.Column="1" SelectionChanged="TabControl_SelectionChanged" Name="Maps">
             <TabItem Header="Map1">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
-                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="3000" Height="2994" Name="Canvas1">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer1" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
+                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="1500" Height="1500" Name="Canvas1">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />
                         </Canvas.Background>
@@ -269,25 +320,31 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Map2">
-                <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" >
-                    <Canvas.Background>
-                        <ImageBrush ImageSource="map.png" Stretch="None" />
-                    </Canvas.Background>
-                </Canvas>
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer2" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
+                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="1500" Height="1500" Name="Canvas2">
+                        <Canvas.Background>
+                            <ImageBrush ImageSource="map.png" Stretch="None" />
+                        </Canvas.Background>
+                    </Canvas>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Map3">
-                <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" >                    
-                    <Canvas.Background>
-                        <ImageBrush ImageSource="map.png" Stretch="None" />
-                    </Canvas.Background>
-                </Canvas>
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer3" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
+                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="1500" Height="1500" Name="Canvas3">
+                        <Canvas.Background>
+                            <ImageBrush ImageSource="map.png" Stretch="None" />
+                        </Canvas.Background>
+                    </Canvas>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Map4">
-                <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True">
-                    <Canvas.Background>
-                        <ImageBrush ImageSource="map.png" Stretch="None" />
-                    </Canvas.Background>
-                </Canvas>
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer4" PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown_1" PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp_1" PreviewMouseMove="ScrollViewer_PreviewMouseMove_1">
+                    <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="1500" Height="1500" Name="Canvas4">
+                        <Canvas.Background>
+                            <ImageBrush ImageSource="map.png" Stretch="None" />
+                        </Canvas.Background>
+                    </Canvas>
+                </ScrollViewer>
             </TabItem>
         </TabControl>       
     </Grid>

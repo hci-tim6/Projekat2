@@ -54,33 +54,102 @@ namespace HCI_Projekat2
             if (t.Label == null || t.Label == "")
                 isAdd = true;
 
-            InitializeComponent();        
+            InitializeComponent();
+            ResetValidation();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
+
+        private void Closing_Click(object sender, CancelEventArgs e)
+        {
             TagThis = _backupTag;
             (Owner as MainWindow).ViewTag?.Refresh();
-            Close();
+            (Owner as MainWindow).View?.Refresh();
+            (Owner as MainWindow).ViewType?.Refresh();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (!CheckValidation())
+                return;
+
             TagThis.Label = TxtLabel.Text;
             TagThis.Description = TxtDescription.Text;
 
-            if(ColorPicker.SelectedColor != null)
-            {
-                TagThis.Color = new SolidColorBrush((Color)ColorPicker.SelectedColor);
-            }            
+            TagThis.Color = new SolidColorBrush((Color)ColorPicker.SelectedColor);
 
             if (isAdd)
             {
-                (Owner as MainWindow).Tags.Add(TagThis);
+                (Owner as MainWindow).Tags.Insert(0, TagThis);
             }
 
             (Owner as MainWindow).ViewTag?.Refresh();
+            (Owner as MainWindow).View?.Refresh();
+            (Owner as MainWindow).TableTag.ScrollIntoView(TagThis);
+            (Owner as MainWindow).TableTag.SelectedItem = TagThis;
+            (Owner as MainWindow).tagHelper.JsonSerialize((Owner as MainWindow).Tags, "tags.json");
+            _backupTag = TagThis;
             Close();
         }
+
+        private void ResetValidation()
+        {
+            Warning_Label.Visibility = Visibility.Hidden;
+            Warning_Color.Visibility = Visibility.Hidden;
+        }
+
+        private bool CheckValidation()
+        {
+            ResetValidation();
+            bool allEntered = true;
+            bool isUnique = true;
+
+            if (!TxtLabel.Text.Trim().Equals(""))
+            {
+                var allTags = (Owner as MainWindow).Tags;
+                if (!TxtLabel.Text.Equals(_backupTag.Label) || _backupTag.Label.Equals(""))
+                {
+                    foreach (var tagsIter in allTags)
+                    {
+                        if (tagsIter.Label.Equals(TxtLabel.Text))
+                        {
+                            isUnique = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                allEntered = false;
+                Warning_Label.Visibility = Visibility.Visible;
+            }
+
+            if (ColorPicker.SelectedColor == null)
+            {
+                allEntered = false;
+                Warning_Color.Visibility = Visibility.Visible;
+            }
+
+            if (!allEntered)
+            {
+                MessageBox.Show("Some fields are empty!", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            if (!isUnique)
+            {
+                Warning_Label.Visibility = Visibility.Visible;
+                MessageBox.Show("Label must be unique!", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+
     }
 }

@@ -9,6 +9,10 @@ namespace HCI_Projekat2.Models
 {
     public class Type : INotifyPropertyChanged
     {
+        public Type()
+        {
+            Label = "";
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         public string Label { get; set; }
         public string Name { get; set; }
@@ -39,6 +43,20 @@ namespace HCI_Projekat2.Models
         public override string ToString()
         {
             return Label;
+        }
+        public override bool Equals(Object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+
+                Type type1 = (Type)obj;
+                return this.Label.Equals(type1.Label);
+            }
         }
     }
 }

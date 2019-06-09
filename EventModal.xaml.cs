@@ -17,6 +17,8 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.Globalization;
 using System.Threading;
+using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace HCI_Projekat2
 {
@@ -55,6 +57,7 @@ namespace HCI_Projekat2
         private ObservableCollection<Tag> Backup_Tags;
 
         private Event _event;
+        private Event _backupEvent;
 
         public Event Event
         {
@@ -94,6 +97,17 @@ namespace HCI_Projekat2
             {
                 _ViewTag = value;
                 OnPropertyChanged("ViewTag");
+            }
+        }
+
+        private Models.Type _selectedType;
+        public Models.Type SelectedType
+        {
+            get { return _selectedType; }
+            set
+            {
+                _selectedType = value;
+                OnPropertyChanged("SelectedType");
             }
         }
 
@@ -219,6 +233,8 @@ namespace HCI_Projekat2
 
         public EventModal(Window owner, Event e, ObservableCollection<Tag> tags, ObservableCollection<Models.Type> types)
         {
+            _backupEvent = new Event{ Label= e.Label, Alcohol= e.Alcohol, Audience= e.Audience, Type= e.Type, Date= e.Date, Description= e.Description,
+                                     Handicap= e.Handicap, Icon= e.Icon, Name= e.Name, Points= e.Points, Price= e.Price, Smoking= e.Smoking, Space= e.Space, Tags= new ObservableCollection<Tag>(e.Tags)};
             CultureInfo ci = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
             ci.DateTimeFormat.ShortDatePattern = "dd.MM.yyyy.";
             Thread.CurrentThread.CurrentCulture = ci;
@@ -238,29 +254,64 @@ namespace HCI_Projekat2
 
             if (e.Label == null || e.Label == "")
                 isAdd = true;
-
+            SelectedType = e.Type;
             SelectedAlcohol = e.Alcohol;
             SelectedHandicap = e.Handicap;
             SelectedSmoking = e.Smoking;
             SelectedSpace = e.Space;
             SelectedTA = e.Audience;
-            SelectedPrice = e.Price;
+            SelectedPrice = e.Price;           
 
             InitializeComponent();
+
+            if (isAdd)
+            {
+                TxtType.SelectedIndex = -1;
+                TxtAlcohol.SelectedIndex = -1;
+                TxtHandicap.SelectedIndex = -1;
+                TxtSmoking.SelectedIndex = -1;
+                TxtSpace.SelectedIndex = -1;
+                TxtAudience.SelectedIndex = -1;
+                TxtPrice.SelectedIndex = -1;
+            }
+            ResetValidation();
+
             DateTime today = DateTime.Now;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            Event.Tags = Backup_Tags;
-            Event.Date = backupDateTime;
-            Event.Icon = Backup_Icon;
-            (Owner as MainWindow).View?.Refresh();
             Close();
+        }
+        private void Closing_Click(object sender, CancelEventArgs e)
+        {
+            Revert();
+        }
+
+        private void Revert()
+        {
+            Event.Name = _backupEvent.Name;
+            Event.Handicap = _backupEvent.Handicap;
+            Event.Alcohol = _backupEvent.Alcohol;
+            Event.Audience = _backupEvent.Audience;
+            Event.Date = _backupEvent.Date;
+            Event.Description = _backupEvent.Description;
+            Event.Icon = _backupEvent.Icon;
+            Event.Label = _backupEvent.Label;
+            Event.Points = _backupEvent.Points;
+            Event.Price = _backupEvent.Price;
+            Event.Smoking = _backupEvent.Smoking;
+            Event.Space = _backupEvent.Space;
+            Event.Type = _backupEvent.Type;
+            Event.Tags = new ObservableCollection<Tag>(_backupEvent.Tags);
+            (Owner as MainWindow).View?.Refresh();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (!CheckValidation())
+                return;
+                
             Event.Label = TxtLabel.Text;
             Event.Name = TxtName.Text;
             Event.Description = TxtDescription.Text;
@@ -274,14 +325,49 @@ namespace HCI_Projekat2
             //Event.Date = (DateTime)TxtDatePicker.SelectedDate;
             Event.Tags = (ObservableCollection<Tag>)TxtTags.ItemsSource;
 
-            Event.Icon = Event.Icon == null ? Event.Type.Icon : Event.Icon;
-
+            Event.Icon = Event.Icon == "" ? Event.Type.Icon : Event.Icon;
+            
             if (isAdd)
             {
-                (Owner as MainWindow).Events.Add(Event);
+                (Owner as MainWindow).Events.Insert(0, Event);
             }
+            (Owner as MainWindow).eventHelper.JsonSerialize((Owner as MainWindow).Events, "events.json");
 
-            (Owner as MainWindow).View?.Refresh();
+            foreach (Canvas c in (Owner as MainWindow).canvases)
+            {
+                FrameworkElement foundImg = null;
+                FrameworkElement foundTxt = null;
+
+                foreach (FrameworkElement fe in c.Children)
+                {
+                    if (fe.Tag.Equals(_backupEvent.Label) && fe.GetType().Equals(typeof(Image)))
+                    {
+                        foundImg = fe;
+                    }
+                    if (fe.Tag.Equals(_backupEvent.Label) && fe.GetType().Equals(typeof(TextBlock)))
+                    {
+                        foundTxt = fe;
+                    }
+                    if (foundImg != null && foundTxt != null)
+                    {
+                        break;
+                    }
+                }
+
+                if (foundImg != null)
+                {
+                    (foundTxt as TextBlock).Text = String.Copy(Event.Label);
+                    
+                    ((Image)foundImg).Source = new BitmapImage(new Uri(Event.Icon, UriKind.RelativeOrAbsolute));
+                }
+            }
+            (Owner as MainWindow).View.Refresh();
+            (Owner as MainWindow).TableEvent.ScrollIntoView(Event);
+            (Owner as MainWindow).TableEvent.SelectedItem = Event;
+            Backup_Tags = Event.Tags;
+            backupDateTime = Event.Date;
+            Backup_Icon = Event.Icon;
+            _backupEvent = Event;
             Close();
         }
 
@@ -328,6 +414,109 @@ namespace HCI_Projekat2
             this.View?.Refresh();
         }
 
+        private void ResetValidation()
+        {
+            Warning_Alchohol.Visibility = Visibility.Hidden;
+            Warning_Audience.Visibility = Visibility.Hidden;
+            Warning_Date.Visibility = Visibility.Hidden;
+            Warning_Handicap.Visibility = Visibility.Hidden;
+            Warning_Label.Visibility = Visibility.Hidden;
+            Warning_Name.Visibility = Visibility.Hidden;
+            Warning_Price.Visibility = Visibility.Hidden;
+            Warning_Smoking.Visibility = Visibility.Hidden;
+            Warning_Space.Visibility = Visibility.Hidden;
+            Warning_Type.Visibility = Visibility.Hidden;
+        }
 
+        private bool CheckValidation()
+        {
+            ResetValidation();
+            bool allEntered = true;
+            bool isUnique = true;
+
+            if (TxtAlcohol.SelectedIndex == -1 || TxtAlcohol.SelectedItem == null)
+            {
+                Warning_Alchohol.Visibility = Visibility.Visible;
+                allEntered = false;
+            }
+
+            if (TxtAudience.SelectedIndex == -1 || TxtAudience.SelectedItem == null)
+            {
+                Warning_Audience.Visibility = Visibility.Visible;
+                allEntered = false;
+            }
+
+            if (TxtHandicap.SelectedIndex == -1 || TxtHandicap.SelectedItem == null)
+            {
+                Warning_Handicap.Visibility = Visibility.Visible;
+                allEntered = false;
+            }
+
+            if (TxtPrice.SelectedIndex == -1 || TxtPrice.SelectedItem == null)
+            {
+                Warning_Price.Visibility = Visibility.Visible;
+                allEntered = false;
+            }
+
+
+            if (TxtSmoking.SelectedIndex == -1 || TxtSmoking.SelectedItem == null)
+            {
+                Warning_Smoking.Visibility = Visibility.Visible;
+                allEntered = false;
+            }
+
+            if (TxtSpace.SelectedIndex == -1 || TxtSpace.SelectedItem == null)
+            {
+                Warning_Space.Visibility = Visibility.Visible;
+                allEntered = false;
+            }
+
+            if (TxtType.SelectedIndex == -1 || TxtType.SelectedItem == null)
+            {
+                Warning_Type.Visibility = Visibility.Visible;
+                allEntered = false;
+            }
+
+            if (!TxtLabel.Text.Trim().Equals(""))
+            {
+                var events = (Owner as MainWindow).Events;
+                if (!TxtLabel.Text.Equals(Event.Label) || Event.Label.Equals(""))
+                {
+                    foreach (var eventIter in events)
+                    {
+                        if (eventIter.Label.Equals(TxtLabel.Text))
+                        {
+                            isUnique = false;
+                            break;
+                        }
+                    }
+                }
+            } else
+            {
+                allEntered = false;
+                Warning_Label.Visibility = Visibility.Visible;
+            }
+
+            if (TxtName.Text.Trim().Equals(""))
+            {
+                allEntered = false;
+                Warning_Name.Visibility = Visibility.Visible;
+            }
+
+            if (!allEntered)
+            {
+                MessageBox.Show("Some fields are empty!", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            if (!isUnique)
+            {
+                Warning_Label.Visibility = Visibility.Visible;
+                MessageBox.Show("Label must be unique!", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
+        }       
     }
 }

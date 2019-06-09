@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_Projekat2"        
         mc:Ignorable="d"
-        Title="TagModal" Height="450" Width="800">
+        Title="TagModal" Height="450" Width="800" Closing="Closing_Click">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -20,15 +20,18 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="4" Grid.Column="0" Content="Color:" HorizontalAlignment="Right"></Label>
+        <Label Name="Warning_Color" Grid.Row="4" Grid.Column="2" Content="*" FontSize="24" Foreground="Red"/>
         <xctk:ColorPicker Name="ColorPicker" Grid.Row ="4" Grid.Column="1" SelectedColor="{Binding TagThis.Color.Color, Mode=OneWay}" Height="26" VerticalAlignment="Top" DisplayColorAndName="True"/>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Label:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding TagThis.Label, Mode=OneWay}"></TextBox>
-        
+        <Label Name="Warning_Label" Grid.Row="0" Grid.Column="2" Content="*" FontSize="24" Foreground="Red"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="TxtLabel" Text="{Binding TagThis.Label, Mode=OneWay}"></TextBox>
+
         <Label Grid.Row="2" Grid.Column="0" Content="Description:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="2" Grid.Column="2" Name="TxtDescription" Text="{Binding TagThis.Description, Mode=OneWay}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" Name="TxtDescription" Text="{Binding TagThis.Description, Mode=OneWay}"></TextBox>
 
         <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Width="60" Margin="15 0" Click="Button_Click_1">Submit</Button>
