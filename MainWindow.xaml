@@ -63,7 +63,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="50px"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Name="BtnImg" Style="{StaticResource MyButtonStyle}" Click="Button_Click_3" Margin="835,5,25,5" Grid.ColumnSpan="2">
+            <Button Grid.Column="1" Grid.Row="0" Name="BtnImg" Style="{StaticResource MyButtonStyle}" Click="Button_Click_3" Grid.ColumnSpan="2">
                 <Button.Background>
                     <ImageBrush ImageSource="levo.png" Stretch="Uniform" ></ImageBrush>
                 </Button.Background>
@@ -164,7 +164,7 @@
                                 </DataGridTemplateColumn>
                                 <DataGridTextColumn Width="100" Header="Name" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Date" Binding="{Binding FormattedDate}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Type" Binding="{Binding Type.Label}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="50" Header="Type" Binding="{Binding Type.Label}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Alcohol" Binding="{Binding Alcohol}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Handicap" Binding="{Binding Handicap}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Smoking" Binding="{Binding Smoking}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>

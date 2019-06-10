@@ -40,7 +40,7 @@
         <ListBox Grid.Row="6" Grid.Column="0" Grid.RowSpan="5" SelectionMode="Extended" Name="TxtTags" ItemsSource="{Binding Event.Tags, Mode=OneWay}" local:HelpProvider.HelpKey="ModalEvent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="#FF000000" HorizontalAlignment="Center" Background="{Binding Color, Mode=OneWay}" BorderThickness="1.5" CornerRadius="6" Width="155">
+                    <Border BorderBrush="#FF000000" HorizontalAlignment="Center" Background="{Binding Color, Mode=OneWay}" BorderThickness="1.5" CornerRadius="6" Width="135">
                         <Label HorizontalAlignment="Center" Content="{Binding Label, Mode=OneWay}" Foreground="White" Margin="0, 3" Padding="2, 0"></Label>
                     </Border>
                 </DataTemplate>
