@@ -13,6 +13,15 @@ namespace HCI_Projekat2.Models
         {
             Label = "";
         }
+
+        public Type(Type oldType)
+        {
+            Label = String.Copy(oldType.Label);
+            Name = String.Copy(oldType.Name);
+            Description = String.Copy(oldType.Description);
+            Icon = String.Copy(oldType.Icon);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public string Label { get; set; }
         public string Name { get; set; }

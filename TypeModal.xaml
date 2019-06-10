@@ -40,7 +40,7 @@
         <TextBox Grid.Row="1" Grid.Column="1" Name="TxtName" Text="{Binding Type.Name, Mode=OneWay}" local:HelpProvider.HelpKey="ModalType"></TextBox>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Description:" HorizontalAlignment="Right" local:HelpProvider.HelpKey="ModalType"></Label>
-        <TextBox Grid.Row="2" Grid.Column="1" Name="TxtDescription" Text="{Binding Type.Description, Mode=OneWay}" local:HelpProvider.HelpKey="ModalType"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" Name="TxtDescription" Text="{Binding Type.Description, Mode=OneWay}" local:HelpProvider.HelpKey="ModalType" TextWrapping="Wrap"></TextBox>
 
         <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Width="60" Margin="15 0" Click="Button_Click_1">Submit</Button>

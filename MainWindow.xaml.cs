@@ -1295,7 +1295,7 @@ namespace HCI_Projekat2
                     img.Tag = m.Label;
                     img.PreviewMouseLeftButtonDown += DraggedImagePreviewMouseLeftButtonDown;
                     img.PreviewMouseMove += DraggedImageMouseMove;
-
+                    img.ToolTip = createTooltipEvent(m);
                     var positionX = m.Points[i].X;
                     var positionY = m.Points[i].Y;
 

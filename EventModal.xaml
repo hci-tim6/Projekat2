@@ -69,11 +69,11 @@
         </xctk:DateTimePicker>
 
         <Label Grid.Row="3" Grid.Column="1" Content="Description:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
-        <TextBox Grid.Row="3" Grid.Column="2" Name="TxtDescription" Text="{Binding Event.Description, Mode=OneWay}"  local:HelpProvider.HelpKey="ModalEvent"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="2" Name="TxtDescription" Text="{Binding Event.Description, Mode=OneWay}"  local:HelpProvider.HelpKey="ModalEvent" TextWrapping="Wrap"></TextBox>
 
         <Label Grid.Row="4" Grid.Column="1" Content="Type:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
         <Label Name="Warning_Type" Grid.Row="4" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        <ComboBox Grid.Row="4" Grid.Column="2" SelectedItem="{Binding Event.Type}" Name="TxtType" ItemsSource="{Binding ViewType}" IsSynchronizedWithCurrentItem="True"  local:HelpProvider.HelpKey="ModalEvent" />
+        <ComboBox Grid.Row="4" Grid.Column="2" SelectedItem="{Binding Event.Type, Mode=OneWay}" Name="TxtType" ItemsSource="{Binding ViewType}" IsSynchronizedWithCurrentItem="True"  local:HelpProvider.HelpKey="ModalEvent" />
 
         <Label Grid.Row="6" Grid.Column="1" Content="Alcohol:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
         <Label Name="Warning_Alchohol" Grid.Row="6" Grid.Column="3" Content="*" FontSize="24" Foreground="Red" />
