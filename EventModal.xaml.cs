@@ -322,7 +322,7 @@ namespace HCI_Projekat2
             Event.Space = (Space)TxtSpace.SelectedItem;
             Event.Price = (Price)TxtPrice.SelectedItem;
             Event.Type = (Models.Type)TxtType.SelectedItem;
-            //Event.Date = (DateTime)TxtDatePicker.SelectedDate;
+            Event.Date = Convert.ToDateTime(TxtDatePicker.Text);
             Event.Tags = (ObservableCollection<Tag>)TxtTags.ItemsSource;
 
             Event.Icon = Event.Icon == "" ? Event.Type.Icon : Event.Icon;
