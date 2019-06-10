@@ -60,18 +60,24 @@ namespace HCI_Projekat2
             }
         }
 
-
+        bool completed = false;
         public DragTutorial(Window owner)
         {
             InitializeComponent();
             DataContext = this;
             this.Owner = owner;
+            TutorialTxt.FontSize = 18;
+            TutorialTxt.Text = "Welcome to drag and drop tutorial!\n\n" +
+                "On the left side of the window is the table containing 2 events. Try using the mouse to drag the event to the map on the right. " +
+                "Hover your mouse over the event you want to drag, press left click and keep holding. " +
+                "Move the mouse over the map on the right while still holding left mouse button. " +
+                "When you decide to drop the item, release the left mouse button."; 
             
             List<Event> EventList = new List<Event> {
-                new Event{Label = "EA1", Name = "Djole Event", Description = "Descc", Type = new Models.Type{Label = "TL10", Name = "TN10", Description = "TDESC10", Icon="pin.png" }, Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Accesible,
-                Smoking = SmokingStatus.Prohibited, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(), Date = DateTime.Now
+                new Event{Label = "tut_ev1", Name = "Rave 3000", Description = "The best rave there is", Type = new Models.Type{Label = "TL10", Name = "TN10", Description = "TDESC10", Icon="pin.png" }, Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Accesible,
+                Smoking = SmokingStatus.Allowed, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Low, Tags = new ObservableCollection<Tag>(), Date = DateTime.Now
                 },
-                new Event{Label = "EA2", Name = "Djole Event2", Description = "Descc", Type = new Models.Type{Label = "TL10", Name = "TN10", Description = "TDESC10", Icon="pin.png" }, Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Accesible,
+                new Event{Label = "tut_ev2", Name = "Hammerfall", Description = "The band hammerfall is having a concert here", Type = new Models.Type{Label = "TL10", Name = "TN10", Description = "TDESC10", Icon="pin.png" }, Alcohol = AlcoholStatus.Prohibited, Icon="pin.png", Handicap = HandicapStatus.Accesible,
                 Smoking = SmokingStatus.Prohibited, Space = Space.Indoors, Audience = TargetAudience.Adults, Price = Price.Free, Tags = new ObservableCollection<Tag>(), Date = DateTime.Now
                 }
             };
@@ -184,101 +190,7 @@ namespace HCI_Projekat2
                 m.Points[0].X = positionX;
                 m.Points[0].Y = positionY;
 
-                WrapPanel wp = new WrapPanel();
-                wp.Orientation = Orientation.Vertical;
-                wp.MaxWidth = 300;
-
-                TextBlock nameTxtBlock = new TextBlock();
-                nameTxtBlock.TextWrapping = TextWrapping.Wrap;
-                nameTxtBlock.FontSize = 14;
-                nameTxtBlock.Text = "Name: " + m.Name;
-                wp.Children.Add(nameTxtBlock);
-
-                TextBlock typeTxtBlock = new TextBlock();
-                typeTxtBlock.TextWrapping = TextWrapping.Wrap;
-                typeTxtBlock.FontSize = 14;
-                typeTxtBlock.Text = "Type: " + m.Type.Label;
-                wp.Children.Add(typeTxtBlock);
-
-                TextBlock dateTxtBlock = new TextBlock();
-                dateTxtBlock.TextWrapping = TextWrapping.Wrap;
-                dateTxtBlock.FontSize = 14;
-                dateTxtBlock.Text = "Date: " + m.FormattedDate;
-                wp.Children.Add(dateTxtBlock);
-
-                TextBlock alcoholTxtBlock = new TextBlock();
-                alcoholTxtBlock.TextWrapping = TextWrapping.Wrap;
-                alcoholTxtBlock.FontSize = 14;
-                alcoholTxtBlock.Text = "Alcohol: " + m.Alcohol;
-                wp.Children.Add(alcoholTxtBlock);
-
-                TextBlock handicapTxtBlock = new TextBlock();
-                handicapTxtBlock.TextWrapping = TextWrapping.Wrap;
-                handicapTxtBlock.FontSize = 14;
-                handicapTxtBlock.Text = "Handicap: " + m.Handicap;
-                wp.Children.Add(handicapTxtBlock);
-
-                TextBlock smokingTxtBlock = new TextBlock();
-                smokingTxtBlock.TextWrapping = TextWrapping.Wrap;
-                smokingTxtBlock.FontSize = 14;
-                smokingTxtBlock.Text = "Smoking: " + m.Smoking;
-                wp.Children.Add(smokingTxtBlock);
-
-                TextBlock spaceTxtBlock = new TextBlock();
-                spaceTxtBlock.TextWrapping = TextWrapping.Wrap;
-                spaceTxtBlock.FontSize = 14;
-                spaceTxtBlock.Text = "Space: " + m.Space;
-                wp.Children.Add(spaceTxtBlock);
-
-                TextBlock audienceTxtBlock = new TextBlock();
-                audienceTxtBlock.TextWrapping = TextWrapping.Wrap;
-                audienceTxtBlock.FontSize = 14;
-                audienceTxtBlock.Text = "Audience: " + m.Audience;
-                wp.Children.Add(audienceTxtBlock);
-
-                TextBlock priceTxtBlock = new TextBlock();
-                priceTxtBlock.TextWrapping = TextWrapping.Wrap;
-                priceTxtBlock.FontSize = 14;
-                priceTxtBlock.Text = "Price: " + m.Price;
-                wp.Children.Add(priceTxtBlock);
-
-                TextBlock tagTxtBlock = new TextBlock();
-                tagTxtBlock.TextWrapping = TextWrapping.Wrap;
-                tagTxtBlock.FontSize = 14;
-                if (m.Tags.ToList().Count == 0)
-                {
-                    tagTxtBlock.Text = "No tags";
-                    wp.Children.Add(tagTxtBlock);
-                }
-                else
-                {
-                    tagTxtBlock.Text = "Tags";
-                    WrapPanel wpTags = new WrapPanel();
-                    Border tagBorder;
-                    Label tagLabel;
-                    foreach (Tag item in m.Tags)
-                    {
-                        tagBorder = new Border();
-                        tagBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
-                        tagBorder.Background = item.Color;
-                        tagBorder.BorderThickness = new Thickness(1.5);
-                        tagBorder.CornerRadius = new CornerRadius(6);
-
-                        tagLabel = new Label();
-                        tagLabel.FontSize = 14;
-                        tagLabel.Content = item.Label;
-                        tagLabel.Foreground = new SolidColorBrush(Colors.White);
-                        tagLabel.Margin = new Thickness(0, 0, 3, 3);
-                        tagLabel.Padding = new Thickness(2, 0, 2, 0);
-
-                        tagBorder.Child = tagLabel;
-                        wpTags.Children.Add(tagBorder);
-                    }
-                    wp.Children.Add(tagTxtBlock);
-                    wp.Children.Add(wpTags);
-                }
-                ToolTip tt = new ToolTip();
-                tt.Content = wp;
+                ToolTip tt = createToolTipEvent(m);
                 img.ToolTip = tt;
 
                 (sender as Canvas).Children.Add(img);
@@ -300,9 +212,115 @@ namespace HCI_Projekat2
                 Canvas.SetTop(eventName, Canvas.GetTop(img) - img.Height / 2.0);
 
                 View.Refresh();
+
+                if (!completed)
+                {
+                    TutorialTxt.Text += "\n\nGreat job! You are now a master of dragging and dropping items!\n" +
+                    "You can exit the tutorial by pressing X in the top right corner or keep playing with the drag and drop functionality.";
+                    completed = true;
+                }
             }
         }
 
+        public ToolTip createToolTipEvent(Event m)
+        {
+            WrapPanel wp = new WrapPanel();
+            wp.Orientation = Orientation.Vertical;
+            wp.MaxWidth = 300;
+
+            TextBlock nameTxtBlock = new TextBlock();
+            nameTxtBlock.TextWrapping = TextWrapping.Wrap;
+            nameTxtBlock.FontSize = 14;
+            nameTxtBlock.Text = "Name: " + m.Name;
+            wp.Children.Add(nameTxtBlock);
+
+            TextBlock typeTxtBlock = new TextBlock();
+            typeTxtBlock.TextWrapping = TextWrapping.Wrap;
+            typeTxtBlock.FontSize = 14;
+            typeTxtBlock.Text = "Type: " + m.Type.Label;
+            wp.Children.Add(typeTxtBlock);
+
+            TextBlock dateTxtBlock = new TextBlock();
+            dateTxtBlock.TextWrapping = TextWrapping.Wrap;
+            dateTxtBlock.FontSize = 14;
+            dateTxtBlock.Text = "Date: " + m.FormattedDate;
+            wp.Children.Add(dateTxtBlock);
+
+            TextBlock alcoholTxtBlock = new TextBlock();
+            alcoholTxtBlock.TextWrapping = TextWrapping.Wrap;
+            alcoholTxtBlock.FontSize = 14;
+            alcoholTxtBlock.Text = "Alcohol: " + m.Alcohol;
+            wp.Children.Add(alcoholTxtBlock);
+
+            TextBlock handicapTxtBlock = new TextBlock();
+            handicapTxtBlock.TextWrapping = TextWrapping.Wrap;
+            handicapTxtBlock.FontSize = 14;
+            handicapTxtBlock.Text = "Handicap: " + m.Handicap;
+            wp.Children.Add(handicapTxtBlock);
+
+            TextBlock smokingTxtBlock = new TextBlock();
+            smokingTxtBlock.TextWrapping = TextWrapping.Wrap;
+            smokingTxtBlock.FontSize = 14;
+            smokingTxtBlock.Text = "Smoking: " + m.Smoking;
+            wp.Children.Add(smokingTxtBlock);
+
+            TextBlock spaceTxtBlock = new TextBlock();
+            spaceTxtBlock.TextWrapping = TextWrapping.Wrap;
+            spaceTxtBlock.FontSize = 14;
+            spaceTxtBlock.Text = "Space: " + m.Space;
+            wp.Children.Add(spaceTxtBlock);
+
+            TextBlock audienceTxtBlock = new TextBlock();
+            audienceTxtBlock.TextWrapping = TextWrapping.Wrap;
+            audienceTxtBlock.FontSize = 14;
+            audienceTxtBlock.Text = "Audience: " + m.Audience;
+            wp.Children.Add(audienceTxtBlock);
+
+            TextBlock priceTxtBlock = new TextBlock();
+            priceTxtBlock.TextWrapping = TextWrapping.Wrap;
+            priceTxtBlock.FontSize = 14;
+            priceTxtBlock.Text = "Price: " + m.Price;
+            wp.Children.Add(priceTxtBlock);
+
+            TextBlock tagTxtBlock = new TextBlock();
+            tagTxtBlock.TextWrapping = TextWrapping.Wrap;
+            tagTxtBlock.FontSize = 14;
+            if (m.Tags.ToList().Count == 0)
+            {
+                tagTxtBlock.Text = "No tags";
+                wp.Children.Add(tagTxtBlock);
+            }
+            else
+            {
+                tagTxtBlock.Text = "Tags";
+                WrapPanel wpTags = new WrapPanel();
+                Border tagBorder;
+                Label tagLabel;
+                foreach (Tag item in m.Tags)
+                {
+                    tagBorder = new Border();
+                    tagBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
+                    tagBorder.Background = item.Color;
+                    tagBorder.BorderThickness = new Thickness(1.5);
+                    tagBorder.CornerRadius = new CornerRadius(6);
+
+                    tagLabel = new Label();
+                    tagLabel.FontSize = 14;
+                    tagLabel.Content = item.Label;
+                    tagLabel.Foreground = new SolidColorBrush(Colors.White);
+                    tagLabel.Margin = new Thickness(0, 0, 3, 3);
+                    tagLabel.Padding = new Thickness(2, 0, 2, 0);
+
+                    tagBorder.Child = tagLabel;
+                    wpTags.Children.Add(tagBorder);
+                }
+                wp.Children.Add(tagTxtBlock);
+                wp.Children.Add(wpTags);
+            }
+            ToolTip tt = new ToolTip();
+            tt.Content = wp;
+            return tt;
+        }
 
         Point startPoint = new Point();
 

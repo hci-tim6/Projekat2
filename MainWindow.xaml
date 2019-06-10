@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:HCI_Projekat2"
         mc:Ignorable="d"
         Title="MainWindow" WindowState="Maximized" Width="1920" Height="1080"
-        FontSize="14">
+        FontSize="14" >
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -49,8 +52,8 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="LeftCol" Width="900px"></ColumnDefinition>            
-            <ColumnDefinition Name="RightCol" Width="*"></ColumnDefinition>         
+            <ColumnDefinition Name="LeftCol" Width="900px"></ColumnDefinition>
+            <ColumnDefinition Name="RightCol" Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -60,13 +63,13 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="50px"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Name="BtnImg" Style="{StaticResource MyButtonStyle}" Grid.Column="1" Click="Button_Click_3">
+            <Button Name="BtnImg" Style="{StaticResource MyButtonStyle}" Click="Button_Click_3" Margin="835,5,25,5" Grid.ColumnSpan="2">
                 <Button.Background>
                     <ImageBrush ImageSource="levo.png" Stretch="Uniform" ></ImageBrush>
                 </Button.Background>
             </Button>
             <TabControl Grid.Row="0" Grid.Column="0" Name="AllTabs">
-                <TabItem Header="Events" Width="286" Height="30">
+                <TabItem Header="Events" Width="286" Height="30" local:HelpProvider.HelpKey="Events">
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -76,7 +79,7 @@
                             <RowDefinition Height="20*"></RowDefinition>
                             <RowDefinition Height="1.2*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" Background="#FFF0F0F0" Padding="5" Margin="0 0 0 5">
+                        <Border Focusable="True"  Grid.Row="0" Background="#FFF0F0F0" Padding="5" Margin="0 0 0 5" local:HelpProvider.HelpKey="FilterEvent">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -96,55 +99,55 @@
                                     <RowDefinition Height="4.5*"></RowDefinition>
                                     <RowDefinition Height="1*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBox Name="SearchLabel" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="SearchBtn_Click"/>
+                                <TextBox Name="SearchLabel" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="SearchBtn_Click" local:HelpProvider.HelpKey="SearchEvent"/>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Search:"/>
                                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5">
-                                    <CheckBox Name="Display_Map" Checked="RefreshView" Unchecked="RefreshView" Margin="0 0 25 0">Show Events on map</CheckBox>
-                                    <CheckBox Name="Display_NoMap" Checked="RefreshView" Unchecked="RefreshView">Show Events not on map</CheckBox>
+                                    <CheckBox Name="Display_Map" Checked="RefreshView" Unchecked="RefreshView" Margin="0 0 25 0" local:HelpProvider.HelpKey="FilterEvent">Show Events on map</CheckBox>
+                                    <CheckBox Name="Display_NoMap" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Show Events not on map</CheckBox>
                                 </StackPanel>
-                                <Button Grid.Row="2" Grid.Column="10" Click="Button_Click">Reset filter</Button>
+                                <Button Grid.Row="2" Grid.Column="10" Click="Button_Click" local:HelpProvider.HelpKey="FilterEvent">Reset filter</Button>
                                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
                                     <Label>Alcohol:</Label>
-                                    <CheckBox Name="Alchohol_Allowed" Checked="RefreshView" Unchecked="RefreshView">Allowed</CheckBox>
-                                    <CheckBox Name="Alchohol_Prohibited" Unchecked="RefreshView" Checked="RefreshView">Prohibited</CheckBox>
-                                    <CheckBox Name="Alchohol_Sold" Checked="RefreshView" Unchecked="RefreshView">Sold</CheckBox>
+                                    <CheckBox Name="Alchohol_Allowed" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Allowed</CheckBox>
+                                    <CheckBox Name="Alchohol_Prohibited" Unchecked="RefreshView" Checked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Prohibited</CheckBox>
+                                    <CheckBox Name="Alchohol_Sold" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Sold</CheckBox>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
                                     <Label>Handicap:</Label>
-                                    <CheckBox Name="Handicap_Accessible" Unchecked="RefreshView" Checked="RefreshView">Accesible</CheckBox>
-                                    <CheckBox Name="Handicap_Inaccesible" Checked="RefreshView" Unchecked="RefreshView">Inaccesible</CheckBox>
+                                    <CheckBox Name="Handicap_Accessible" Unchecked="RefreshView" Checked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Accesible</CheckBox>
+                                    <CheckBox Name="Handicap_Inaccesible" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Inaccesible</CheckBox>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="4">
                                     <Label>Smoking:</Label>
-                                    <CheckBox Name="Smoking_Allowed" Checked="RefreshView" Unchecked="RefreshView">Allowed</CheckBox>
-                                    <CheckBox Name="Smoking_Prohibited" Unchecked="RefreshView" Checked="RefreshView">Prohibited</CheckBox>
+                                    <CheckBox Name="Smoking_Allowed" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Allowed</CheckBox>
+                                    <CheckBox Name="Smoking_Prohibited" Unchecked="RefreshView" Checked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Prohibited</CheckBox>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="6">
                                     <Label>Space:</Label>
-                                    <CheckBox Name="Space_Indoors" Checked="RefreshView" Unchecked="RefreshView">Indoors</CheckBox>
-                                    <CheckBox Name="Space_Outdoors" Unchecked="RefreshView" Checked="RefreshView">Outdoors</CheckBox>
+                                    <CheckBox Name="Space_Indoors" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Indoors</CheckBox>
+                                    <CheckBox Name="Space_Outdoors" Unchecked="RefreshView" Checked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Outdoors</CheckBox>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="8">
                                     <Label>Audience:</Label>
-                                    <CheckBox Name="Audience_Children" Checked="RefreshView" Unchecked="RefreshView">Children</CheckBox>
-                                    <CheckBox Name="Audience_Adults" Checked="RefreshView" Unchecked="RefreshView">Adults</CheckBox>
-                                    <CheckBox Name="Audience_Elderly" Unchecked="RefreshView" Checked="RefreshView">Elderly</CheckBox>
+                                    <CheckBox Name="Audience_Children" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Children</CheckBox>
+                                    <CheckBox Name="Audience_Adults" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Adults</CheckBox>
+                                    <CheckBox Name="Audience_Elderly" Unchecked="RefreshView" Checked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Elderly</CheckBox>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="10">
                                     <Label>Price:</Label>
-                                    <CheckBox Name="Price_Free" Checked="RefreshView" Unchecked="RefreshView">Free</CheckBox>
-                                    <CheckBox Name="Price_Low" Unchecked="RefreshView" Checked="RefreshView">Low</CheckBox>
-                                    <CheckBox Name="Price_Medium" Checked="RefreshView" Unchecked="RefreshView">Medium</CheckBox>
-                                    <CheckBox Name="Price_High" Unchecked="RefreshView" Checked="RefreshView">High</CheckBox>
+                                    <CheckBox Name="Price_Free" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Free</CheckBox>
+                                    <CheckBox Name="Price_Low" Unchecked="RefreshView" Checked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Low</CheckBox>
+                                    <CheckBox Name="Price_Medium" Checked="RefreshView" Unchecked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">Medium</CheckBox>
+                                    <CheckBox Name="Price_High" Unchecked="RefreshView" Checked="RefreshView" local:HelpProvider.HelpKey="FilterEvent">High</CheckBox>
                                 </StackPanel>
                             </Grid>
                         </Border>
-                        <DataGrid Name="TableEvent" Grid.Row="1" ItemsSource="{Binding Path=Events}" IsReadOnly="True" RowHeaderWidth="0"
+                        <DataGrid Focusable="True" Name="TableEvent" Grid.Row="1" ItemsSource="{Binding Path=Events}" IsReadOnly="True" RowHeaderWidth="0"
                               AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" HorizontalScrollBarVisibility="Disabled"
                               MouseLeftButtonDown="TableEvent_PreviewMouseLeftButtonDown" MouseMove="TableEvent_MouseMove">
 
@@ -159,7 +162,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
+                                <DataGridTextColumn Width="100" Header="Name" Binding="{Binding Name}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Date" Binding="{Binding FormattedDate}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Type" Binding="{Binding Type.Label}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Alcohol" Binding="{Binding Alcohol}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
@@ -168,7 +171,7 @@
                                 <DataGridTextColumn Header="Space" Binding="{Binding Space}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Audience" Binding="{Binding Audience}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" ElementStyle="{StaticResource WrapText}"></DataGridTextColumn>
-                                <DataGridTemplateColumn Header="Tags" Width="*" IsReadOnly="True">
+                                <DataGridTemplateColumn Width="*" Header="Tags" IsReadOnly="True">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ItemsControl ItemsSource="{Binding Tags}">
@@ -203,18 +206,18 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
-                                <DataGrid.RowDetailsTemplate>
-                                    <DataTemplate>
-                                        <Border>
-                                            <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding Description}"  VerticalAlignment="Center" />
-                                        </Border>
-                                    </DataTemplate>
-                                </DataGrid.RowDetailsTemplate>
+                            <DataGrid.RowDetailsTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding Description}"  VerticalAlignment="Center" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
                         </DataGrid>
                         <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click_1">New event</Button>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Types" Width="280">
+                <TabItem Header="Types" Width="280" local:HelpProvider.HelpKey="Types">
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -244,7 +247,7 @@
                                     <RowDefinition Height="1*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Search:"/>
-                                <TextBox Name="SearchTypes" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="RefreshTypes"/>
+                                <TextBox Name="SearchTypes" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="RefreshTypes" local:HelpProvider.HelpKey="SearchType"/>
                                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Margin="0 8 0 0">
                                     <CheckBox Name="Display_Unused_Types" Checked="RefreshTypes" Unchecked="RefreshTypes">Show only unused types</CheckBox>
                                 </StackPanel>
@@ -282,7 +285,7 @@
                         <Button Grid.Row="2" Height="35px" Width="75px" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click_2">New type</Button>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Tags" Width="280">
+                <TabItem Header="Tags" Width="280" local:HelpProvider.HelpKey="Tags">
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -311,7 +314,7 @@
                                     <RowDefinition Height="1*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Search:"/>
-                                <TextBox Name="SearchTags" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="RefreshTags"/>
+                                <TextBox Name="SearchTags" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="10" TextChanged="RefreshTags" local:HelpProvider.HelpKey="SearchTag"/>
                             </Grid>
                         </Border>
                         <DataGrid Name="TableTag" Grid.Row="1" ItemsSource="{Binding Path=Tags}" IsReadOnly="True" RowHeaderWidth="0"
@@ -347,10 +350,48 @@
                 </TabItem>
             </TabControl>
         </Grid>
-        <Button Panel.ZIndex="2" Grid.Row="0" Grid.Column="1" Width="30" Height="30" VerticalAlignment="top" HorizontalAlignment="Right" Margin="2 2 10 2" Click="Button_Click_4"></Button>
+        <StackPanel Orientation="Vertical" Panel.ZIndex="2" Grid.Row="0" Grid.Column="1">
+            <Button Width="30" Height="30" VerticalAlignment="top" HorizontalAlignment="Right" Margin="2 2 10 2" Click="ShowTutMenu" Background="Transparent"
+                    BorderThickness="0">
+                <Image Source="qmark.png"></Image>
+            </Button>
+            <Menu  Name="tutorialMenu"  Visibility="Hidden"  HorizontalAlignment="Right" VerticalAlignment="Top" MouseLeave="ShowTutMenu" FontSize="16">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Click="MenuItem_Click">
+                    <MenuItem.Header>
+                        <DockPanel>
+                            <Label>Help</Label>
+                        </DockPanel>
+                    </MenuItem.Header>
+
+                </MenuItem>
+                <MenuItem Click="Button_Click_4">
+                    <MenuItem.Header>
+                        <DockPanel>
+                            <Label>Drag Tutorial</Label>
+                        </DockPanel>
+                    </MenuItem.Header>
+
+                </MenuItem>
+                <MenuItem Click="FTutorial">
+                    <MenuItem.Header>
+                        <DockPanel>
+                            <Label>Filter Tutorial</Label>
+                        </DockPanel>
+                    </MenuItem.Header>
+
+                </MenuItem>
+            </Menu>
+
+        </StackPanel>
+
         <TabControl Panel.ZIndex="1" Grid.Row="0" Grid.Column="1" SelectionChanged="TabControl_SelectionChanged" Name="Maps">
-            <TabItem Header="Map1" Height="30" Width="100">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer1">
+            <TabItem Header="Map1" Height="30" Width="100" local:HelpProvider.HelpKey="Map">
+                <ScrollViewer local:HelpProvider.HelpKey="Map" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer1">
                     <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="2000" Height="2000" Name="Canvas1">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />
@@ -358,8 +399,8 @@
                     </Canvas>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Map2" Width="100">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer2">
+            <TabItem Header="Map2" Width="100" local:HelpProvider.HelpKey="Map">
+                <ScrollViewer local:HelpProvider.HelpKey="Map" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer2">
                     <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="2000" Height="2000" Name="Canvas2">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />
@@ -367,8 +408,8 @@
                     </Canvas>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Map3" Width="100">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer3" >
+            <TabItem Header="Map3" Width="100" local:HelpProvider.HelpKey="Map">
+                <ScrollViewer local:HelpProvider.HelpKey="Map" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer3" >
                     <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="2000" Height="2000" Name="Canvas3">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />
@@ -376,8 +417,8 @@
                     </Canvas>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Map4" Width="100">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer4" >
+            <TabItem Header="Map4" Width="100" local:HelpProvider.HelpKey="Map">
+                <ScrollViewer local:HelpProvider.HelpKey="Map" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Name="scrollViewer4" >
                     <Canvas DragEnter="Canvas_DragEnter" Drop="Canvas_Drop" AllowDrop="True" Width="2000" Height="2000" Name="Canvas4">
                         <Canvas.Background>
                             <ImageBrush ImageSource="map.png" Stretch="None" />

@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="Type" Height="500" Width="500" Closing="Closing_Click"
         FontSize="14">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -26,18 +29,18 @@
         <Label Grid.Row="4" Grid.Column="0" Content="Image:" HorizontalAlignment="Right"></Label>
         <Label Name="Warning_Icon" Grid.Row="4" Grid.Column="2" Content="*" FontSize="24" Foreground="Red"/>
         <Image Name="IconImage" Source="{Binding Type.Icon, Mode=OneWay}" Grid.Row="4" Grid.Column="1"></Image>
-        <Button Grid.Row="5" Grid.Column="1" Click="Button_Click_2"  Width="120">Choose file</Button>
+        <Button Grid.Row="5" Grid.Column="1" Click="Button_Click_2"  Width="120" local:HelpProvider.HelpKey="ModalType">Choose file</Button>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Label:" HorizontalAlignment="Right"></Label>
+        <Label Grid.Row="0" Grid.Column="0" Content="Label:" HorizontalAlignment="Right" local:HelpProvider.HelpKey="ModalType"></Label>
         <Label Name="Warning_Label" Grid.Row="0" Grid.Column="2" Content="*" FontSize="24" Foreground="Red"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Name="TxtLabel" Text="{Binding Type.Label, Mode=OneWay}"></TextBox>
-        
-        <Label Grid.Row="1" Grid.Column="0" Content="Name:" HorizontalAlignment="Right"></Label>
-        <Label Name="Warning_Name" Grid.Row="1" Grid.Column="2" Content="*" FontSize="24" Foreground="Red"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="TxtName" Text="{Binding Type.Name, Mode=OneWay}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Name="TxtLabel" Text="{Binding Type.Label, Mode=OneWay}" local:HelpProvider.HelpKey="ModalType"></TextBox>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Description:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="2" Grid.Column="1" Name="TxtDescription" Text="{Binding Type.Description, Mode=OneWay}"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0" Content="Name:" HorizontalAlignment="Right" local:HelpProvider.HelpKey="ModalType"></Label>
+        <Label Name="Warning_Name" Grid.Row="1" Grid.Column="2" Content="*" FontSize="24" Foreground="Red"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="TxtName" Text="{Binding Type.Name, Mode=OneWay}" local:HelpProvider.HelpKey="ModalType"></TextBox>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Description:" HorizontalAlignment="Right" local:HelpProvider.HelpKey="ModalType"></Label>
+        <TextBox Grid.Row="2" Grid.Column="1" Name="TxtDescription" Text="{Binding Type.Description, Mode=OneWay}" local:HelpProvider.HelpKey="ModalType"></TextBox>
 
         <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Width="60" Margin="15 0" Click="Button_Click_1">Submit</Button>

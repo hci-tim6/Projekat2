@@ -353,7 +353,7 @@ namespace HCI_Projekat2
                         break;
                     }
                 }
-
+                ToolTip tt = (Owner as MainWindow).createTooltipEvent(Event);
                 if (foundImg != null)
                 {
                     (foundTxt as TextBlock).Text = String.Copy(Event.Label);
@@ -363,6 +363,7 @@ namespace HCI_Projekat2
                     ((Image)foundImg).Source = new BitmapImage(new Uri(Event.Icon, UriKind.RelativeOrAbsolute));
                     foundImg.Tag = String.Copy(Event.Label);
                     foundImg.Name = String.Copy(Event.Label);
+                    foundImg.ToolTip = tt;
 
                 }
             }
@@ -374,6 +375,7 @@ namespace HCI_Projekat2
             backupDateTime = Event.Date;
             Backup_Icon = Event.Icon;
             _backupEvent = new Event(Event);
+            
             Close();
         }
 
@@ -523,6 +525,16 @@ namespace HCI_Projekat2
             }
 
             return true;
-        }       
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            FrameworkElement focusedControl = FocusManager.GetFocusedElement(this) as FrameworkElement;
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                HelpProvider.ShowHelp(str, this);
+            }
+        }
     }
 }

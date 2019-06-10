@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_Projekat2"
         mc:Ignorable="d"
-        Title="DragTutorial" Height="500" Width="1200" ResizeMode="NoResize" Closing="Window_Closing">
+        Title="Drag and Drop Tutorial" Height="600" Width="1200" ResizeMode="NoResize" Closing="Window_Closing"
+        FontSize="14">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="WrapText">
             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -24,12 +25,13 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="1.2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Padding="20" Name="TutorialTxt"></TextBlock>
         <Canvas DragEnter="Canvas_DragEnterTutorial" Drop="Canvas_DropTutorial" AllowDrop="True" Grid.Row="1" Grid.Column="1" Name="TutorialCanvas">
             <Canvas.Background>
                 <ImageBrush ImageSource="map.png" Stretch="None" />

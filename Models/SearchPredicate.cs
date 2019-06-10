@@ -37,6 +37,13 @@ namespace HCI_Projekat2.Models
             {
                 return true;
             }
+            foreach (Tag tgg in e.Tags)
+            {
+                if (tgg.Label.ToLower().Contains(Query))
+                {
+                    return true;
+                }
+            }
             return false;
         }
         public int compareEvents(Event e1, Event e2)
@@ -75,6 +82,13 @@ namespace HCI_Projekat2.Models
             if (e1.Type.Name.ToLower().Contains(Query))
             {
                 retVal += 3;
+            }
+            foreach (Tag tgg in e1.Tags)
+            {
+                if (tgg.Label.ToLower().Contains(Query))
+                {
+                    retVal += 4;
+                }
             }
             return retVal;
         }

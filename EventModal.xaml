@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"        
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"    
+        xmlns:local="clr-namespace:HCI_Projekat2"
         mc:Ignorable="d"
         Title="Event" Height="500" Width="500" ResizeMode="NoResize" Closing="Closing_Click"
-        FontSize="14">
+        FontSize="14"  local:HelpProvider.HelpKey="ModalEvent">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Window.CommandBindings>
     <Grid Margin="20">        
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -31,9 +35,9 @@
         </Grid.ColumnDefinitions>
 
         <Image Source="{Binding Event.Icon}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"></Image>
-        <Button Grid.Row="4" Grid.Column="0" Click="Button_Click_4">Choose file</Button>
+        <Button Grid.Row="4" Grid.Column="0" Click="Button_Click_4" local:HelpProvider.HelpKey="ModalEvent">Choose file</Button>
 
-        <ListBox Grid.Row="6" Grid.Column="0" Grid.RowSpan="5" SelectionMode="Extended" Name="TxtTags" ItemsSource="{Binding Event.Tags, Mode=OneWay}">
+        <ListBox Grid.Row="6" Grid.Column="0" Grid.RowSpan="5" SelectionMode="Extended" Name="TxtTags" ItemsSource="{Binding Event.Tags, Mode=OneWay}" local:HelpProvider.HelpKey="ModalEvent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="#FF000000" HorizontalAlignment="Center" Background="{Binding Color, Mode=OneWay}" BorderThickness="1.5" CornerRadius="6" Width="155">
@@ -43,56 +47,57 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Row="11" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Width="60" Margin="5 0" Click="Button_Click_3">Add tag</Button>
-            <Button Margin="5 0" Click="Button_Click_2">Remove tag</Button>
-        </StackPanel>      
+            <Button Width="60" Margin="5 0" Click="Button_Click_3" local:HelpProvider.HelpKey="ModalEvent">Add tag</Button>
+            <Button Margin="5 0" Click="Button_Click_2" local:HelpProvider.HelpKey="ModalEvent">Remove tag</Button>
+        </StackPanel>
 
-        <Label Grid.Row="0" Grid.Column="1" Content="Label:" HorizontalAlignment="Right"></Label>
-        <Label Name="Warning_Label" Grid.Row="0" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding Event.Label, Mode=OneWay}"></TextBox>
-        
-        <Label Grid.Row="1" Grid.Column="1" Content="Name:" HorizontalAlignment="Right"></Label>
-        <Label Name="Warning_Name" Grid.Row="1" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        
-        <TextBox Grid.Row="1" Grid.Column="2" Name="TxtName" Text="{Binding Event.Name, Mode=OneWay}"></TextBox>
-        <Label Grid.Row="2" Grid.Column="1" Content="Date:" HorizontalAlignment="Right" ></Label>
-        <Label Name="Warning_Date" Grid.Row="2" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
+        <Label Grid.Row="0" Grid.Column="1" Content="Label:" HorizontalAlignment="Right" local:HelpProvider.HelpKey="ModalEvent"></Label>
+        <Label Name="Warning_Label" Grid.Row="0" Grid.Column="3" Content="*" FontSize="24" Foreground="Red" local:HelpProvider.HelpKey="ModalEvent"/>
+        <TextBox Grid.Row="0" Grid.Column="2" Name="TxtLabel" Text="{Binding Event.Label, Mode=OneWay}" local:HelpProvider.HelpKey="ModalEvent"></TextBox>
+
+        <Label Grid.Row="1" Grid.Column="1" Content="Name:" HorizontalAlignment="Right" local:HelpProvider.HelpKey="ModalEvent"></Label>
+        <Label Name="Warning_Name" Grid.Row="1" Grid.Column="3" Content="*" FontSize="24" Foreground="Red" local:HelpProvider.HelpKey="ModalEvent"/>
+
+        <TextBox Grid.Row="1" Grid.Column="2" Name="TxtName" Text="{Binding Event.Name, Mode=OneWay}" local:HelpProvider.HelpKey="ModalEvent"></TextBox>
+        <Label Grid.Row="2" Grid.Column="1" Content="Date:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
+        <Label Name="Warning_Date" Grid.Row="2" Grid.Column="3" Content="*" FontSize="24" Foreground="Red" local:HelpProvider.HelpKey="ModalEvent"/>
         <xctk:DateTimePicker
             Name="TxtDatePicker"
-            Grid.Row="2" Grid.Column="2" Format="Custom" FormatString="dd.MM.yyyy." TimePickerVisibility="Hidden" Value ="{Binding Event.Date, Mode=OneWay}">
+            Focusable="True"
+            Grid.Row="2" Grid.Column="2" Format="Custom" FormatString="dd.MM.yyyy." TimePickerVisibility="Hidden" Value ="{Binding Event.Date, Mode=OneWay}" local:HelpProvider.HelpKey="ModalEvent">
 
         </xctk:DateTimePicker>
-        
-        <Label Grid.Row="3" Grid.Column="1" Content="Description:" HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="3" Grid.Column="2" Name="TxtDescription" Text="{Binding Event.Description, Mode=OneWay}"></TextBox>
 
-        <Label Grid.Row="4" Grid.Column="1" Content="Type:" HorizontalAlignment="Right"></Label>
+        <Label Grid.Row="3" Grid.Column="1" Content="Description:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
+        <TextBox Grid.Row="3" Grid.Column="2" Name="TxtDescription" Text="{Binding Event.Description, Mode=OneWay}"  local:HelpProvider.HelpKey="ModalEvent"></TextBox>
+
+        <Label Grid.Row="4" Grid.Column="1" Content="Type:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
         <Label Name="Warning_Type" Grid.Row="4" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        <ComboBox Grid.Row="4" Grid.Column="2" SelectedItem="{Binding Event.Type}" Name="TxtType" ItemsSource="{Binding ViewType}" IsSynchronizedWithCurrentItem="True"/>
-        
-        <Label Grid.Row="6" Grid.Column="1" Content="Alcohol:" HorizontalAlignment="Right"></Label>
-        <Label Name="Warning_Alchohol" Grid.Row="6" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        <ComboBox Grid.Row="6" Grid.Column="2" SelectedItem="{Binding SelectedAlcohol, Mode=OneWay}" Name="TxtAlcohol" ItemsSource="{Binding CBListAlcohol}"/>
+        <ComboBox Grid.Row="4" Grid.Column="2" SelectedItem="{Binding Event.Type}" Name="TxtType" ItemsSource="{Binding ViewType}" IsSynchronizedWithCurrentItem="True"  local:HelpProvider.HelpKey="ModalEvent" />
 
-        <Label Grid.Row="7" Grid.Column="1" Content="Handicap:" HorizontalAlignment="Right"></Label>
+        <Label Grid.Row="6" Grid.Column="1" Content="Alcohol:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
+        <Label Name="Warning_Alchohol" Grid.Row="6" Grid.Column="3" Content="*" FontSize="24" Foreground="Red" />
+        <ComboBox Grid.Row="6" Grid.Column="2" SelectedItem="{Binding SelectedAlcohol, Mode=OneWay}" Name="TxtAlcohol" ItemsSource="{Binding CBListAlcohol}"  local:HelpProvider.HelpKey="ModalEvent"/>
+
+        <Label Grid.Row="7" Grid.Column="1" Content="Handicap:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
         <Label Name="Warning_Handicap" Grid.Row="7" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        <ComboBox Grid.Row="7" Grid.Column="2" SelectedItem="{Binding SelectedHandicap, Mode=OneWay}" Name="TxtHandicap" ItemsSource="{Binding CBListHandicap}"/>
-        
-        <Label Grid.Row="8" Grid.Column="1" Content="Smoking:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="7" Grid.Column="2" SelectedItem="{Binding SelectedHandicap, Mode=OneWay}" Name="TxtHandicap" ItemsSource="{Binding CBListHandicap}"  local:HelpProvider.HelpKey="ModalEvent"/>
+
+        <Label Grid.Row="8" Grid.Column="1" Content="Smoking:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
         <Label Name="Warning_Smoking" Grid.Row="8" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        <ComboBox Grid.Row="8" Grid.Column="2" SelectedItem="{Binding SelectedSmoking, Mode=OneWay}" Name="TxtSmoking" ItemsSource="{Binding CBListSmoking}"/>
-        
-        <Label Grid.Row="9" Grid.Column="1" Content="Space:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="8" Grid.Column="2" SelectedItem="{Binding SelectedSmoking, Mode=OneWay}" Name="TxtSmoking" ItemsSource="{Binding CBListSmoking}"  local:HelpProvider.HelpKey="ModalEvent"/>
+
+        <Label Grid.Row="9" Grid.Column="1" Content="Space:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
         <Label Name="Warning_Space" Grid.Row="9" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        <ComboBox Grid.Row="9" Grid.Column="2" SelectedItem="{Binding SelectedSpace, Mode=OneWay}" Name="TxtSpace" ItemsSource="{Binding CBListSpace}"/>
-        
-        <Label Grid.Row="10" Grid.Column="1" Content="Target audience:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="9" Grid.Column="2" SelectedItem="{Binding SelectedSpace, Mode=OneWay}" Name="TxtSpace" ItemsSource="{Binding CBListSpace}"  local:HelpProvider.HelpKey="ModalEvent"/>
+
+        <Label Grid.Row="10" Grid.Column="1" Content="Target audience:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
         <Label Name="Warning_Audience" Grid.Row="10" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        <ComboBox Grid.Row="10" Grid.Column="2" SelectedItem="{Binding SelectedTA, Mode=OneWay}" Name="TxtAudience" ItemsSource="{Binding CBListTA}"/>
-        
-        <Label Grid.Row="11" Grid.Column="1" Content="Price:" HorizontalAlignment="Right"></Label>
+        <ComboBox Grid.Row="10" Grid.Column="2" SelectedItem="{Binding SelectedTA, Mode=OneWay}" Name="TxtAudience" ItemsSource="{Binding CBListTA}" local:HelpProvider.HelpKey="ModalEvent"/>
+
+        <Label Grid.Row="11" Grid.Column="1" Content="Price:" HorizontalAlignment="Right"  local:HelpProvider.HelpKey="ModalEvent"></Label>
         <Label Name="Warning_Price" Grid.Row="11" Grid.Column="3" Content="*" FontSize="24" Foreground="Red"/>
-        <ComboBox Grid.Row="11" Grid.Column="2"  SelectedItem="{Binding SelectedPrice, Mode=OneWay}" Name="TxtPrice" ItemsSource="{Binding CBListPrice}"/>
+        <ComboBox Grid.Row="11" Grid.Column="2"  SelectedItem="{Binding SelectedPrice, Mode=OneWay}" Name="TxtPrice" ItemsSource="{Binding CBListPrice}"  local:HelpProvider.HelpKey="ModalEvent"/>
         
         <StackPanel Grid.Row="12" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Width="60" Margin="15 0" Click="Button_Click_1">Submit</Button>

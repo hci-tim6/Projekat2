@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using HCI_Projekat2.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -85,11 +86,39 @@ namespace HCI_Projekat2
             {
                 (Owner as MainWindow).Types.Insert(0, Type);
             }
+            foreach (Event ev1 in (Owner as MainWindow).Events)
+            {
+                if (ev1.Type.Label.Equals(_backupType.Label))
+                {
+                    ev1.Type = Type;
+                    break;
+                }
+            }
             (Owner as MainWindow).typeHelper.JsonSerialize((Owner as MainWindow).Types, "types.json");
 
             (Owner as MainWindow).TableType.ScrollIntoView(Type);
             (Owner as MainWindow).TableType.SelectedItem = Type;
             (Owner as MainWindow).ViewType?.Refresh();
+            foreach (Event ev1 in (Owner as MainWindow).Events)
+            {
+                if (ev1.Type.Label.Equals(Type.Label))
+                {
+                    foreach (Canvas c in (Owner as MainWindow).canvases)
+                    {
+                        FrameworkElement foundImg = null;
+
+                        foreach (FrameworkElement fe in c.Children)
+                        {
+                            if (fe.Tag.Equals(ev1.Label) && fe.GetType().Equals(typeof(Image)))
+                            {
+                                foundImg = fe;
+                                ((Image)foundImg).ToolTip = (Owner as MainWindow).createTooltipEvent(ev1);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
             _backupType = Type;
             Close();
         }
@@ -174,6 +203,15 @@ namespace HCI_Projekat2
             }
 
             return true;
+        }
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            FrameworkElement focusedControl = FocusManager.GetFocusedElement(this) as FrameworkElement;
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                HelpProvider.ShowHelp(str, this);
+            }
         }
 
     }

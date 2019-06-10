@@ -85,12 +85,46 @@ namespace HCI_Projekat2
             {
                 (Owner as MainWindow).Tags.Insert(0, TagThis);
             }
-
+            foreach (Event ev1 in (Owner as MainWindow).Events)
+            {
+                for (int i = 0; i < ev1.Tags.Count; i++)
+                {
+                    if (ev1.Tags.ElementAt(i).Label.Equals(_backupTag.Label))
+                    {
+                        ev1.Tags[i] = TagThis;
+                        break;
+                    }
+                }
+            }
             (Owner as MainWindow).ViewTag?.Refresh();
             (Owner as MainWindow).View?.Refresh();
             (Owner as MainWindow).TableTag.ScrollIntoView(TagThis);
             (Owner as MainWindow).TableTag.SelectedItem = TagThis;
             (Owner as MainWindow).tagHelper.JsonSerialize((Owner as MainWindow).Tags, "tags.json");
+            foreach (Event ev1 in (Owner as MainWindow).Events)
+            {
+                foreach (Tag tg in ev1.Tags)
+                {
+                    if (tg.Label.Equals(TagThis.Label))
+                    {
+                        foreach (Canvas c in (Owner as MainWindow).canvases)
+                        {
+                            FrameworkElement foundImg = null;
+
+                            foreach (FrameworkElement fe in c.Children)
+                            {
+                                if (fe.Tag.Equals(ev1.Label) && fe.GetType().Equals(typeof(Image)))
+                                {
+                                    foundImg = fe;
+                                    ((Image)foundImg).ToolTip = (Owner as MainWindow).createTooltipEvent(ev1);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
             _backupTag = TagThis;
             Close();
         }
@@ -150,6 +184,14 @@ namespace HCI_Projekat2
             return true;
         }
 
-
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            FrameworkElement focusedControl = FocusManager.GetFocusedElement(this) as FrameworkElement;
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                HelpProvider.ShowHelp(str, this);
+            }
+        }
     }
 }

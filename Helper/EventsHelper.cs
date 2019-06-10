@@ -36,5 +36,23 @@ namespace HCI_Projekat2.Helper
                 return events;
             }
         }
+
+        public void saveMapIndex(int mapIndex, string fileName)
+        {
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fileName))
+            {
+                file.WriteLine(mapIndex);
+            }
+        }
+
+        public int loadMapIndex(string fileName)
+        {
+            string index;
+            using (System.IO.StreamReader file = new System.IO.StreamReader(fileName))
+            {
+                index = file.ReadToEnd(); 
+            }
+            return int.Parse(index);
+        }
     }
 }

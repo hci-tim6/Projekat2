@@ -9,6 +9,19 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("desno.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/events.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/filterevent.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/filtertype.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/index.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/map.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/modalevent.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/modaltag.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/modaltype.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/searchevent.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/searchtag.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/searchtype.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/tags.html")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("help/types.html")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("levo.png")]
 
 
